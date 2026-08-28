@@ -102,24 +102,25 @@ const stats: Stat[] = [
   { num: '04', label: 'Built For', value: 'Scale' },
 ];
 
-const teamMembers: TeamMember[] = [
-  {
-    id: 'martin',
-    name: 'Engr. Martin Agoha',
-    role: 'Founder & Technology Lead',
-    image: '/mypix.jpeg',
-    number: '01',
-    bio: [
-      'Engr. Martin Agoha is the driving force behind SkillForge Technologies & Solutions Ltd, with a focus on technology, product development, and practical digital solutions.',
-      'Through SkillForge, he builds products that bring technology closer to everyday organizations and the people they serve. His flagship initiative is CoreOne, a connected education technology platform designed to simplify school operations, learning, and communication.',
-      'His approach combines engineering, product thinking, and a commitment to building systems that are clear, useful, scalable, and designed around real-world needs.',
-    ],
-    highlights: [
-      { number: '01', title: 'Product Development', desc: 'Turning ideas into practical digital products.' },
-      { number: '02', title: 'Technology', desc: 'Designing modern systems built for growth.' },
-      { number: '03', title: 'Innovation', desc: 'Using technology to solve meaningful problems.' },
-    ],
-  },
+const executiveMember: TeamMember = {
+  id: 'martin',
+  name: 'Engr. Martin Agoha',
+  role: 'Founder & Technology Lead',
+  image: '/mypix.jpeg',
+  number: '01',
+  bio: [
+    'Engr. Martin Agoha is the driving force behind SkillForge Technologies & Solutions Ltd, with a focus on technology, product development, and practical digital solutions.',
+    'Through SkillForge, he builds products that bring technology closer to everyday organizations and the people they serve. His flagship initiative is CoreOne, a connected education technology platform designed to simplify school operations, learning, and communication.',
+    'His approach combines engineering, product thinking, and a commitment to building systems that are clear, useful, scalable, and designed around real-world needs.',
+  ],
+  highlights: [
+    { number: '01', title: 'Product Development', desc: 'Turning ideas into practical digital products.' },
+    { number: '02', title: 'Technology', desc: 'Designing modern systems built for growth.' },
+    { number: '03', title: 'Innovation', desc: 'Using technology to solve meaningful problems.' },
+  ],
+};
+
+const subTeamMembers: TeamMember[] = [
   {
     id: 'elime',
     name: 'Mr Etim Elijah Ime',
@@ -803,78 +804,166 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TEAM SECTION */}
+      {/* ORGANOGRAM TEAM SECTION */}
       <section id="team" className="section team-section">
         <div className="container">
           <div className="section-intro centered team-heading">
-            <span className="section-kicker" style={{ color: '#4f46e5', fontWeight: 700, fontSize: '0.85rem' }}>05 / OUR TEAM</span>
+            <span className="section-kicker" style={{ color: '#4f46e5', fontWeight: 700, fontSize: '0.85rem' }}>05 / ORGANOGRAM</span>
 
             <h2 style={{ color: '#020617', fontSize: '2.5rem' }}>
-              Meet the people behind <em>SkillForge.</em>
+              Organizational <em>Structure.</em>
             </h2>
 
             <p style={{ color: '#0f172a', fontSize: '1.15rem' }}>
-              Click any profile below to view details about our leadership and team members.
+              Click any node in the organogram to view complete profile details.
             </p>
           </div>
 
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-            gap: '1.5rem',
-            maxWidth: '920px',
-            margin: '0 auto',
-            paddingTop: '1rem',
-          }}>
-            {teamMembers.map((member) => (
+          <div style={{ maxWidth: '1000px', margin: '2rem auto 0 auto', position: 'relative' }}>
+            {/* Executive Level (Top Node) */}
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
               <button
-                key={member.id}
                 type="button"
-                onClick={() => setSelectedMember(member)}
+                onClick={() => setSelectedMember(executiveMember)}
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
                   textAlign: 'center',
                   background: '#ffffff',
-                  border: '1px solid #cbd5e1',
-                  borderRadius: '12px',
-                  padding: '1.25rem 0.75rem',
+                  border: '2px solid #4f46e5',
+                  borderRadius: '16px',
+                  padding: '1.5rem',
                   cursor: 'pointer',
-                  transition: 'transform 0.2s ease, border-color 0.2s ease',
+                  width: '100%',
+                  maxWidth: '280px',
+                  boxShadow: '0 10px 25px -5px rgba(79, 70, 229, 0.15)',
+                  position: 'relative',
+                  zIndex: 2,
                 }}
               >
                 <div style={{
                   position: 'relative',
-                  width: '76px',
-                  height: '76px',
+                  width: '90px',
+                  height: '90px',
                   borderRadius: '50%',
                   overflow: 'hidden',
-                  border: '2px solid #4f46e5',
-                  marginBottom: '0.75rem',
+                  border: '3px solid #4f46e5',
+                  marginBottom: '0.85rem',
                 }}>
                   <Image
-                    src={member.image}
-                    alt={member.name}
+                    src={executiveMember.image}
+                    alt={executiveMember.name}
                     fill
                     style={{ objectFit: 'cover' }}
                   />
                 </div>
-                <strong style={{ color: '#020617', fontSize: '0.95rem', lineHeight: '1.3', fontWeight: 700 }}>{member.name}</strong>
-                <span style={{ color: '#0f172a', fontSize: '0.8rem', marginTop: '0.25rem', fontWeight: 600 }}>{member.role}</span>
+                <strong style={{ color: '#020617', fontSize: '1.1rem', fontWeight: 800 }}>{executiveMember.name}</strong>
+                <span style={{ color: '#4f46e5', fontSize: '0.85rem', marginTop: '0.2rem', fontWeight: 700 }}>{executiveMember.role}</span>
                 <span style={{
-                  marginTop: '0.75rem',
+                  marginTop: '0.85rem',
                   fontSize: '0.75rem',
                   fontWeight: '700',
-                  color: '#4f46e5',
-                  background: '#eef2ff',
-                  padding: '0.25rem 0.6rem',
+                  color: '#ffffff',
+                  background: '#4f46e5',
+                  padding: '0.3rem 0.75rem',
                   borderRadius: '999px',
                 }}>
-                  View details
+                  Executive Lead
                 </span>
               </button>
-            ))}
+            </div>
+
+            {/* Connecting Vertical Line from Executive */}
+            <div style={{
+              width: '2px',
+              height: '40px',
+              backgroundColor: '#cbd5e1',
+              margin: '0 auto',
+            }} />
+
+            {/* Horizontal Branching Bar */}
+            <div style={{
+              position: 'relative',
+              maxWidth: '780px',
+              margin: '0 auto',
+            }}>
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: '12.5%',
+                right: '12.5%',
+                height: '2px',
+                backgroundColor: '#cbd5e1',
+              }} />
+
+              {/* Subordinate Grid Nodes */}
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))',
+                gap: '1.5rem',
+                paddingTop: '20px',
+              }}>
+                {subTeamMembers.map((member) => (
+                  <div key={member.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    {/* Vertical Drop Line to Node */}
+                    <div style={{
+                      width: '2px',
+                      height: '20px',
+                      backgroundColor: '#cbd5e1',
+                      marginTop: '-20px',
+                    }} />
+
+                    <button
+                      type="button"
+                      onClick={() => setSelectedMember(member)}
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        textAlign: 'center',
+                        background: '#ffffff',
+                        border: '1px solid #cbd5e1',
+                        borderRadius: '12px',
+                        padding: '1.25rem 0.75rem',
+                        cursor: 'pointer',
+                        width: '100%',
+                        height: '100%',
+                        transition: 'transform 0.2s ease, border-color 0.2s ease',
+                      }}
+                    >
+                      <div style={{
+                        position: 'relative',
+                        width: '70px',
+                        height: '70px',
+                        borderRadius: '50%',
+                        overflow: 'hidden',
+                        border: '2px solid #64748b',
+                        marginBottom: '0.75rem',
+                      }}>
+                        <Image
+                          src={member.image}
+                          alt={member.name}
+                          fill
+                          style={{ objectFit: 'cover' }}
+                        />
+                      </div>
+                      <strong style={{ color: '#020617', fontSize: '0.95rem', lineHeight: '1.3', fontWeight: 700 }}>{member.name}</strong>
+                      <span style={{ color: '#0f172a', fontSize: '0.8rem', marginTop: '0.25rem', fontWeight: 600 }}>{member.role}</span>
+                      <span style={{
+                        marginTop: 'auto',
+                        paddingTop: '0.75rem',
+                        fontSize: '0.75rem',
+                        fontWeight: '700',
+                        color: '#4f46e5',
+                      }}>
+                        View profile →
+                      </span>
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
