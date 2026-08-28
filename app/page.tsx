@@ -988,12 +988,12 @@ export default function Home() {
             </p>
 
             <div className="contact-links">
-              <a href="tel:080352699839">
+              <a href="tel:08035269983">
                 <span>01</span>
 
                 <div>
                   <small>Calls</small>
-                  <strong>080352699839</strong>
+                  <strong>08035269983</strong>
                 </div>
 
                 <ArrowRight />
@@ -1084,7 +1084,7 @@ export default function Home() {
                   <input
                     name="phone"
                     type="tel"
-                    placeholder="080352699839"
+                    placeholder="08035269983"
                     autoComplete="tel"
                   />
                 </label>
@@ -1189,9 +1189,9 @@ export default function Home() {
           </div>
 
           <div className="contact-details">
-            <a className="contact-detail" href="tel:080352699839">
+            <a className="contact-detail" href="tel:08035269983">
               <span>Calls</span>
-              <strong>080352699839</strong>
+              <strong>08035269983</strong>
             </a>
 
             <a
