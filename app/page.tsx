@@ -44,76 +44,129 @@ type Stat = {
   value: string;
 };
 
+type TeamMember = {
+  id: string;
+  name: string;
+  role: string;
+  image: string;
+  number: string;
+  bio: string[];
+  highlights?: { number: string; title: string; desc: string }[];
+};
+
 const solutions: Solution[] = [
   {
     icon: GraduationCap,
-    title: 'Education Technology',
-    text: 'Digital infrastructure that brings school operations, learning, communication and insight into one connected ecosystem.',
+    title: 'EdTech Solutions',
+    text: 'Unified digital platforms connecting school management, learning, and communication.',
   },
   {
     icon: Code2,
-    title: 'Software & Product Engineering',
-    text: 'Purpose-built web and mobile products designed around real workflows, real users and measurable outcomes.',
+    title: 'Software Engineering',
+    text: 'Purpose-built web and mobile apps engineered for real-world business outcomes.',
   },
   {
     icon: Network,
     title: 'Digital Transformation',
-    text: 'Modernise manual processes with connected systems, automation, data and practical technology strategy.',
+    text: 'Automating manual processes with modern architecture and smart data workflows.',
   },
 ];
 
 const coreOneFeatures: CoreOneFeature[] = [
   {
     title: 'School Administration',
-    text: 'A central workspace for everyday school operations and records.',
+    text: 'Centralized workspace for day-to-day operations and student records.',
     icon: Layers3,
   },
   {
-    title: 'Student & Parent Experience',
-    text: 'One connected digital experience for students, families and administrators.',
+    title: 'Student & Parent Portal',
+    text: 'Seamless interaction and real-time updates for families and staff.',
     icon: UsersRound,
   },
   {
     title: 'Learning & Assessment',
-    text: 'Attendance, CBT, ebooks, results and learning tools in one ecosystem.',
+    text: 'CBT, attendance tracking, report cards, and interactive tools.',
     icon: BookOpen,
   },
   {
-    title: 'Security & Access',
-    text: 'Role-based access and school-aware controls designed for multi-tenant environments.',
+    title: 'Enterprise Security',
+    text: 'Role-based access controls for multi-tenant educational institutions.',
     icon: ShieldCheck,
   },
 ];
 
 const stats: Stat[] = [
+  { num: '01', label: 'Flagship Product', value: 'CoreOne' },
+  { num: '02', label: 'Platforms', value: 'Web + Mobile' },
+  { num: '03', label: 'Core Focus', value: 'People & Data' },
+  { num: '04', label: 'Architecture', value: 'Built to Scale' },
+];
+
+const teamMembers: TeamMember[] = [
   {
-    num: '01',
-    label: 'Flagship Product',
-    value: 'CoreOne',
+    id: 'martin',
+    name: 'Engr. Martin Agoha',
+    role: 'Founder & Technology Lead',
+    image: '/mypix.jpeg',
+    number: '01',
+    bio: [
+      'Engr. Martin Agoha is the driving force behind SkillForge Technologies & Solutions Ltd, with a focus on technology, product development and practical digital solutions.',
+      'Through SkillForge, he is building products that bring technology closer to everyday organisations and the people they serve. His flagship initiative is CoreOne, a connected education technology platform designed to simplify school operations, learning, communication and digital experiences.',
+      'His approach combines engineering, product thinking and a commitment to building systems that are clear, useful, scalable and designed around real-world needs.',
+    ],
+    highlights: [
+      { number: '01', title: 'Product Development', desc: 'Turning ideas into practical digital products.' },
+      { number: '02', title: 'Technology', desc: 'Designing modern systems built for growth.' },
+      { number: '03', title: 'Innovation', desc: 'Using technology to solve meaningful problems.' },
+    ],
   },
   {
-    num: '02',
-    label: 'Experience Layers',
-    value: 'Web + Mobile',
+    id: 'elime',
+    name: 'Mr Etim Elijah Ime',
+    role: 'Sales Manager',
+    image: '/Eli.png',
+    number: '02',
+    bio: [
+      'Leads sales and business development, helping schools and organisations discover the value of SkillForge solutions and CoreOne while building strong customer relationships.',
+    ],
   },
   {
-    num: '03',
-    label: 'Core Focus',
-    value: 'People + Process + Data',
+    id: 'victor',
+    name: 'Mr Victor',
+    role: 'Product Technical Support / Sales',
+    image: '/victor.png',
+    number: '03',
+    bio: [
+      'Supports customers with product-related technical needs while helping prospective users understand CoreOne, its features and how it can fit their operational requirements.',
+    ],
   },
   {
-    num: '04',
-    label: 'Built For',
-    value: 'Scale',
+    id: 'ejike',
+    name: 'Mr Ejike',
+    role: 'Product Technical Support / Sales',
+    image: '/ejike.jpeg',
+    number: '04',
+    bio: [
+      'Supports customers with product-related technical needs while helping prospective users understand CoreOne, its features and how it can fit their operational requirements.',
+    ],
+  },
+  {
+    id: 'favour',
+    name: 'Mr Favour Ekezie',
+    role: 'Product Technical Support / Sales',
+    image: '/favour.png',
+    number: '05',
+    bio: [
+      'Combines technical product support with customer engagement, helping users adopt CoreOne effectively while supporting product demonstrations and sales conversations.',
+    ],
   },
 ];
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
 
-  const formId =
-    process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID || 'xrpggbar';
-
+  const formId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID || 'xrpggbar';
   const [formState, handleFormSubmit] = useForm(formId);
 
   const scrollTo = (id: string) => {
@@ -121,20 +174,20 @@ export default function Home() {
       behavior: 'smooth',
       block: 'start',
     });
-
     setMenuOpen(false);
   };
 
   return (
-    <main className="site-shell">
+    <main className="site-shell bg-slate-50 text-slate-900 font-sans antialiased">
       <div className="ambient ambient-a" />
       <div className="ambient ambient-b" />
 
-      <header className="site-header">
-        <div className="container nav-wrap">
+      {/* HEADER */}
+      <header className="site-header sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+        <div className="container nav-wrap flex items-center justify-between py-4 px-6 max-w-7xl mx-auto">
           <button
             type="button"
-            className="brand"
+            className="brand flex items-center gap-3 text-left"
             onClick={() => scrollTo('home')}
             aria-label="Go to home"
           >
@@ -142,50 +195,32 @@ export default function Home() {
               <Image
                 src="/logo.png"
                 alt="SkillForge Technologies & Solutions Ltd"
-                width={180}
-                height={58}
+                width={160}
+                height={50}
                 priority
               />
             </span>
-
-            <span className="brand-copy">
-              <strong>SKILLFORGE</strong>
-              <small>Technologies &amp; Solutions Ltd</small>
+            <span className="brand-copy flex flex-col">
+              <strong className="text-slate-950 font-bold text-lg tracking-wide">SKILLFORGE</strong>
+              <small className="text-slate-600 text-xs font-medium">Technologies &amp; Solutions Ltd</small>
             </span>
           </button>
 
           <nav
-            className={`main-nav ${menuOpen ? 'open' : ''}`}
+            className={`main-nav text-slate-800 font-semibold ${menuOpen ? 'open' : ''}`}
             aria-label="Main navigation"
           >
-            <button type="button" onClick={() => scrollTo('company')}>
-              Company
-            </button>
-
-            <button type="button" onClick={() => scrollTo('coreone')}>
-              CoreOne
-            </button>
-
-            <button type="button" onClick={() => scrollTo('solutions')}>
-              Solutions
-            </button>
-
-            <button type="button" onClick={() => scrollTo('technology')}>
-              Technology
-            </button>
-
-            <button type="button" onClick={() => scrollTo('team')}>
-              Team
-            </button>
-
-            <button type="button" onClick={() => scrollTo('contact')}>
-              Contact
-            </button>
+            <button type="button" onClick={() => scrollTo('company')}>Company</button>
+            <button type="button" onClick={() => scrollTo('coreone')}>CoreOne</button>
+            <button type="button" onClick={() => scrollTo('solutions')}>Solutions</button>
+            <button type="button" onClick={() => scrollTo('technology')}>Technology</button>
+            <button type="button" onClick={() => scrollTo('team')}>Team</button>
+            <button type="button" onClick={() => scrollTo('contact')}>Contact</button>
           </nav>
 
           <button
             type="button"
-            className="nav-cta"
+            className="nav-cta bg-slate-900 hover:bg-slate-800 text-white font-medium px-4 py-2 rounded-lg transition-colors flex items-center gap-2"
             onClick={() => scrollTo('contact')}
           >
             Talk to us
@@ -194,7 +229,7 @@ export default function Home() {
 
           <button
             type="button"
-            className="menu-toggle"
+            className="menu-toggle text-slate-900"
             onClick={() => setMenuOpen((open) => !open)}
             aria-label="Toggle navigation"
             aria-expanded={menuOpen}
@@ -204,29 +239,27 @@ export default function Home() {
         </div>
       </header>
 
-      <section id="home" className="hero">
-        <div className="container hero-grid">
-          <div className="hero-copy">
-            <div className="eyebrow">
-              <span className="pulse-dot" />
+      {/* HERO SECTION */}
+      <section id="home" className="hero py-20 px-6">
+        <div className="container hero-grid max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="hero-copy space-y-6">
+            <div className="eyebrow inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-200/80 text-slate-900 font-semibold text-sm">
+              <span className="pulse-dot w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               Technology. Products. Possibility.
             </div>
 
-            <h1>
-              We build digital products that <em>move people forward.</em>
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-950 leading-tight">
+              We build software that <em className="italic text-indigo-600">moves businesses forward.</em>
             </h1>
 
-            <p>
-              SkillForge Technologies &amp; Solutions Ltd is a product-driven
-              technology company building modern software, digital platforms
-              and practical solutions for organisations ready to operate
-              smarter.
+            <p className="text-slate-700 text-lg leading-relaxed font-normal">
+              SkillForge crafts high-performance software, modern digital platforms, and scalable technology solutions tailored for forward-thinking organizations.
             </p>
 
-            <div className="hero-actions">
+            <div className="hero-actions flex flex-wrap gap-4 pt-2">
               <button
                 type="button"
-                className="primary-btn"
+                className="primary-btn bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition-all flex items-center gap-2"
                 onClick={() => scrollTo('coreone')}
               >
                 Explore CoreOne
@@ -235,197 +268,134 @@ export default function Home() {
 
               <button
                 type="button"
-                className="ghost-btn"
+                className="ghost-btn border border-slate-300 hover:bg-slate-100 text-slate-800 font-semibold px-6 py-3 rounded-lg transition-all flex items-center gap-2"
                 onClick={() => scrollTo('company')}
               >
-                <span className="play">
+                <span className="play text-indigo-600">
                   <Play size={13} fill="currentColor" />
                 </span>
                 Discover SkillForge
               </button>
             </div>
 
-            <div className="hero-proof">
+            <div className="hero-proof flex items-center gap-8 pt-6 border-t border-slate-200">
               <div>
-                <span>01</span>
-                <p>Company behind CoreOne</p>
+                <span className="text-xl font-bold text-slate-900">01</span>
+                <p className="text-sm font-medium text-slate-600">Creators of CoreOne</p>
               </div>
-
               <div>
-                <span>∞</span>
-                <p>Built to grow with you</p>
+                <span className="text-xl font-bold text-slate-900">∞</span>
+                <p className="text-sm font-medium text-slate-600">Built for scale</p>
               </div>
-
               <div>
-                <span>24/7</span>
-                <p>Digital-first mindset</p>
+                <span className="text-xl font-bold text-slate-900">24/7</span>
+                <p className="text-sm font-medium text-slate-600">Digital Reliability</p>
               </div>
             </div>
           </div>
 
-          <div className="hero-stage">
-            <div className="stage-grid" />
-            <div className="orbit orbit-one" />
-            <div className="orbit orbit-two" />
-
-            <div className="core-card">
-              <div className="core-card-top">
-                <span className="product-badge">
+          {/* CoreOne Display */}
+          <div className="hero-stage relative bg-slate-900 text-white p-8 rounded-2xl shadow-xl border border-slate-800">
+            <div className="core-card space-y-4">
+              <div className="core-card-top flex justify-between items-center">
+                <span className="product-badge bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 text-xs px-3 py-1 rounded-full flex items-center gap-1 font-semibold">
                   <Sparkles size={13} />
                   FLAGSHIP PRODUCT
                 </span>
-
-                <span className="status">LIVE ECOSYSTEM</span>
+                <span className="status text-xs text-emerald-400 font-bold tracking-wider">LIVE ECOSYSTEM</span>
               </div>
 
-              <div className="core-logo">
-                C<span>O</span>RE<span className="mini-dot">•</span>ONE
+              <div className="core-logo text-3xl font-black text-white tracking-wider">
+                CORE<span className="text-indigo-400">ONE</span>
               </div>
 
-              <p>
-                The connected operating layer for modern schools.
+              <p className="text-slate-300 text-sm font-medium">
+                The connected operating system for modern school management.
               </p>
 
-              <div className="dashboard-window">
-                <div className="window-bar">
-                  <span />
-                  <span />
-                  <span />
-                  <i>CoreOne Workspace</i>
+              <div className="dashboard-window bg-slate-950 p-4 rounded-xl border border-slate-800">
+                <div className="window-bar flex items-center gap-2 text-xs text-slate-400 mb-3 pb-2 border-b border-slate-800">
+                  <span className="w-2.5 h-2.5 rounded-full bg-red-500" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-green-500" />
+                  <i className="not-italic text-slate-400 ml-2">CoreOne Dashboard Workspace</i>
                 </div>
 
-                <div className="dash-body">
-                  <aside>
-                    <b />
-                    <span />
-                    <span />
-                    <span />
-                    <span />
-                    <span />
-                    <span />
-                  </aside>
-
-                  <div className="dash-main">
-                    <div className="dash-heading">
-                      <span>School Overview</span>
-                      <small>2026 / 2027</small>
-                    </div>
-
-                    <div className="metric-row">
-                      <div />
-                      <div />
-                      <div />
-                    </div>
-
-                    <div className="chart-row">
-                      <div className="chart">
-                        <span />
-                        <i />
-                        <b />
-                        <em />
-                        <strong />
-                      </div>
-
-                      <div className="donut" />
-                    </div>
+                <div className="dash-body space-y-3">
+                  <div className="dash-heading flex justify-between text-xs font-semibold text-slate-300">
+                    <span>School Overview</span>
+                    <small className="text-indigo-400">2026 / 2027</small>
+                  </div>
+                  <div className="metric-row grid grid-cols-3 gap-2">
+                    <div className="h-8 bg-slate-800 rounded-md" />
+                    <div className="h-8 bg-slate-800 rounded-md" />
+                    <div className="h-8 bg-slate-800 rounded-md" />
                   </div>
                 </div>
               </div>
 
-              <div className="floating-card card-users">
-                <UsersRound size={16} />
-
-                <div>
-                  <b>Students</b>
-                  <span>Connected</span>
+              <div className="flex gap-4 pt-2 text-xs font-medium text-slate-300">
+                <div className="flex items-center gap-2 bg-slate-800/80 px-3 py-1.5 rounded-md border border-slate-700">
+                  <UsersRound size={16} className="text-indigo-400" />
+                  <span>Integrated Portals</span>
                 </div>
-
-                <strong>↗</strong>
-              </div>
-
-              <div className="floating-card card-security">
-                <ShieldCheck size={16} />
-
-                <div>
-                  <b>Access</b>
-                  <span>Role-aware</span>
+                <div className="flex items-center gap-2 bg-slate-800/80 px-3 py-1.5 rounded-md border border-slate-700">
+                  <ShieldCheck size={16} className="text-emerald-400" />
+                  <span>Role-Based Access</span>
                 </div>
-
-                <strong>✓</strong>
               </div>
             </div>
 
-            <div className="stage-note">
-              <Zap size={15} />
-              One platform. Many possibilities.
+            <div className="stage-note mt-6 text-xs text-slate-400 flex items-center gap-2">
+              <Zap size={15} className="text-yellow-400" />
+              Unified infrastructure. Endless capability.
             </div>
           </div>
         </div>
       </section>
 
-      <section className="ticker-section" aria-label="Our areas of focus">
-        <div className="ticker-track">
-          <span>PRODUCT DEVELOPMENT</span>
-          <i />
-
-          <span>EDTECH</span>
-          <i />
-
-          <span>DIGITAL TRANSFORMATION</span>
-          <i />
-
-          <span>SOFTWARE SOLUTIONS</span>
-          <i />
-
-          <span>PRODUCT TECHNICAL SUPPORT</span>
-          <i />
-
-          <span>PRODUCT DEVELOPMENT</span>
-          <i />
-
-          <span>EDTECH</span>
-          <i />
+      {/* TICKER */}
+      <section className="ticker-section bg-slate-900 text-white py-4 overflow-hidden border-y border-slate-800" aria-label="Our areas of focus">
+        <div className="ticker-track flex justify-around font-bold tracking-widest text-xs uppercase text-slate-300">
+          <span>Software Engineering</span> •
+          <span>EdTech Platforms</span> •
+          <span>Digital Transformation</span> •
+          <span>Technical Support</span> •
+          <span>Cloud Solutions</span>
         </div>
       </section>
 
-      <section id="company" className="section company-section">
-        <div className="container">
-          <div className="section-intro split">
+      {/* COMPANY SECTION */}
+      <section id="company" className="section py-20 px-6 bg-white border-b border-slate-200">
+        <div className="container max-w-7xl mx-auto space-y-12">
+          <div className="section-intro split grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
             <div>
-              <span className="section-kicker">01 / THE COMPANY</span>
-
-              <h2>
-                Technology is only powerful when it{' '}
-                <em>solves something real.</em>
+              <span className="section-kicker font-bold text-indigo-600 text-xs tracking-widest uppercase">01 / ABOUT US</span>
+              <h2 className="text-3xl font-extrabold text-slate-950 mt-2">
+                Technology engineered to solve <em className="italic text-indigo-600">real challenges.</em>
               </h2>
             </div>
-
-            <p>
-              We combine product thinking, engineering and business
-              understanding to build technology that is useful today and ready
-              for tomorrow.
+            <p className="text-slate-700 text-base leading-relaxed font-normal">
+              We integrate product design, engineering, and digital strategy to build fast, scalable tools that drive actual operational success.
             </p>
           </div>
 
-          <div className="company-grid">
-            <article className="manifesto-card">
-              <div className="manifesto-number">SF / 01</div>
-
-              <h3>
-                Built with purpose.
-                <br />
-                <em>Engineered for impact.</em>
-              </h3>
-
-              <p>
-                SkillForge exists to design and deliver technology that
-                improves how organisations work, how people interact with
-                systems, and how decisions are made.
-              </p>
+          <div className="company-grid grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <article className="manifesto-card bg-slate-900 text-white p-8 rounded-2xl flex flex-col justify-between">
+              <div>
+                <div className="manifesto-number text-indigo-400 font-mono text-sm mb-4">SF / 01</div>
+                <h3 className="text-2xl font-bold leading-tight mb-4">
+                  Purpose-built design. <br />
+                  <em className="italic text-indigo-300">Measurable impact.</em>
+                </h3>
+                <p className="text-slate-300 text-sm leading-relaxed mb-6">
+                  SkillForge delivers software solutions designed to simplify workflows, enhance productivity, and improve organizational decision-making.
+                </p>
+              </div>
 
               <button
                 type="button"
-                className="text-link"
+                className="text-link inline-flex items-center gap-2 text-indigo-400 font-semibold hover:text-indigo-300 text-sm"
                 onClick={() => scrollTo('contact')}
               >
                 Work with SkillForge
@@ -433,44 +403,28 @@ export default function Home() {
               </button>
             </article>
 
-            <div className="principles">
-              <div className="principle">
-                <span>01</span>
-
+            <div className="principles space-y-4">
+              <div className="principle p-6 rounded-xl bg-slate-50 border border-slate-200 flex items-start gap-4">
+                <span className="font-mono text-indigo-600 font-bold">01</span>
                 <div>
-                  <h4>Product-led</h4>
-
-                  <p>
-                    We build around outcomes, users and the full product
-                    journey — not technology for technology&apos;s sake.
-                  </p>
+                  <h4 className="font-bold text-slate-950">Product-Led</h4>
+                  <p className="text-slate-700 text-sm mt-1">Focused strictly on real user outcomes, efficiency, and continuous usability.</p>
                 </div>
               </div>
 
-              <div className="principle">
-                <span>02</span>
-
+              <div className="principle p-6 rounded-xl bg-slate-50 border border-slate-200 flex items-start gap-4">
+                <span className="font-mono text-indigo-600 font-bold">02</span>
                 <div>
-                  <h4>Human-centred</h4>
-
-                  <p>
-                    Interfaces should feel clear. Systems should feel
-                    understandable. Experiences should respect the people
-                    using them.
-                  </p>
+                  <h4 className="font-bold text-slate-950">Human-Centered</h4>
+                  <p className="text-slate-700 text-sm mt-1">Intuitive interfaces designed to keep complex tasks simple and understandable.</p>
                 </div>
               </div>
 
-              <div className="principle">
-                <span>03</span>
-
+              <div className="principle p-6 rounded-xl bg-slate-50 border border-slate-200 flex items-start gap-4">
+                <span className="font-mono text-indigo-600 font-bold">03</span>
                 <div>
-                  <h4>Built to scale</h4>
-
-                  <p>
-                    Our architecture and thinking are designed so products can
-                    grow with the organisations they serve.
-                  </p>
+                  <h4 className="font-bold text-slate-950">Scalable Systems</h4>
+                  <p className="text-slate-700 text-sm mt-1">Built with modular technologies that expand effortlessly alongside your organization.</p>
                 </div>
               </div>
             </div>
@@ -478,177 +432,89 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="coreone" className="section coreone-section">
-        <div className="container">
-          <div className="coreone-head">
+      {/* COREONE SECTION */}
+      <section id="coreone" className="section py-20 px-6 bg-slate-50">
+        <div className="container max-w-7xl mx-auto space-y-12">
+          <div className="coreone-head flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-slate-200 pb-8">
             <div>
-              <span className="section-kicker">02 / FLAGSHIP PRODUCT</span>
-
-              <div className="coreone-wordmark">
-                CORE<span>ONE</span>
+              <span className="section-kicker font-bold text-indigo-600 text-xs tracking-widest uppercase">02 / FLAGSHIP PRODUCT</span>
+              <div className="coreone-wordmark text-4xl font-black text-slate-950 tracking-wider mt-1">
+                CORE<span className="text-indigo-600">ONE</span>
               </div>
             </div>
 
-            <div>
-              <span className="live-pill">
-                <span />
-                In active development
+            <div className="max-w-xl">
+              <span className="live-pill inline-flex items-center gap-2 px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full mb-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-600" />
+                In Active Deployment
               </span>
-
-              <p>
-                CoreOne is SkillForge&apos;s flagship education technology
-                platform — connecting school administration, learning,
-                communication and insight in one modern ecosystem.
+              <p className="text-slate-700 font-medium">
+                CoreOne is our all-in-one EdTech platform connecting administration, academics, automated reporting, and parent communication into one secure environment.
               </p>
             </div>
           </div>
 
-          <div className="coreone-showcase">
-            <div className="showcase-copy">
-              <span className="mini-label">
-                ONE CORE. EVERY EXPERIENCE.
-              </span>
-
-              <h3>
-                Run the school.
-                <br />
-                <em>Empower the people.</em>
+          <div className="coreone-showcase grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="showcase-copy space-y-6">
+              <span className="mini-label text-xs font-bold tracking-wider text-slate-500 uppercase">ONE ECOSYSTEM. COMPLETE CONTROL.</span>
+              <h3 className="text-3xl font-extrabold text-slate-950 leading-snug">
+                Streamline administration. <br />
+                <em className="italic text-indigo-600">Empower educators.</em>
               </h3>
 
-              <p>
-                From school administrators and teachers to students and
-                parents, CoreOne is designed to give each person the tools,
-                visibility and digital experience they need.
-              </p>
-
-              <div className="feature-list">
+              <div className="feature-list grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                 {coreOneFeatures.map((feature) => {
                   const FeatureIcon = feature.icon;
-
                   return (
-                    <div className="feature-item" key={feature.title}>
-                      <span className="feature-icon">
-                        <FeatureIcon size={18} />
+                    <div className="feature-item p-4 rounded-xl bg-white border border-slate-200 space-y-2 shadow-sm" key={feature.title}>
+                      <span className="feature-icon text-indigo-600 inline-block">
+                        <FeatureIcon size={20} />
                       </span>
-
-                      <div>
-                        <b>{feature.title}</b>
-                        <p>{feature.text}</p>
-                      </div>
+                      <b className="block text-slate-950 font-bold text-sm">{feature.title}</b>
+                      <p className="text-slate-600 text-xs leading-normal">{feature.text}</p>
                     </div>
                   );
                 })}
               </div>
             </div>
 
-            <div className="coreone-ui">
-              <div className="device-back" />
-
-              <div className="core-dashboard">
-                <div className="cd-top">
-                  <span className="cd-brand">CoreOne</span>
-
-                  <div className="cd-actions">
-                    <span>Search</span>
-                    <b>MT</b>
-                  </div>
-                </div>
-
-                <div className="cd-content">
-                  <div className="cd-side">
-                    <div className="active">Overview</div>
-                    <div>Students</div>
-                    <div>Academics</div>
-                    <div>Learning</div>
-                    <div>Attendance</div>
-                    <div>Communication</div>
-                    <div>Reports</div>
-                  </div>
-
-                  <div className="cd-workspace">
-                    <div className="welcome">
-                      Good morning, School Admin <span>✦</span>
-                    </div>
-
-                    <div className="workspace-sub">
-                      Everything important, in one place.
-                    </div>
-
-                    <div className="stat-cards">
-                      <div>
-                        <small>Students</small>
-                        <strong>1,842</strong>
-                        <span>+12.4%</span>
-                      </div>
-
-                      <div>
-                        <small>Attendance</small>
-                        <strong>94.8%</strong>
-                        <span>+2.1%</span>
-                      </div>
-
-                      <div>
-                        <small>Classes</small>
-                        <strong>38</strong>
-                        <span>+4.0%</span>
-                      </div>
-                    </div>
-
-                    <div className="wide-panel">
-                      <div className="panel-title">
-                        <b>School activity</b>
-                        <span>View report →</span>
-                      </div>
-
-                      <div className="bars">
-                        <i />
-                        <i />
-                        <i />
-                        <i />
-                        <i />
-                        <i />
-                        <i />
-                        <i />
-                        <i />
-                        <i />
-                        <i />
-                        <i />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 text-white space-y-4">
+              <div className="flex justify-between items-center text-xs text-slate-400 border-b border-slate-800 pb-3">
+                <span className="font-bold text-white">CoreOne System Preview</span>
+                <span>Active Portal</span>
               </div>
 
-              <div className="device-phone">
-                <div className="phone-notch" />
+              <div className="space-y-3">
+                <div className="p-4 bg-slate-800 rounded-lg">
+                  <div className="text-xs text-slate-400">Welcome Back</div>
+                  <div className="text-base font-bold text-white">School Operations Dashboard</div>
+                </div>
 
-                <div className="phone-screen">
-                  <span className="tiny-brand">CoreOne</span>
-                  <b>Good morning 👋</b>
-                  <small>Here&apos;s your learning snapshot.</small>
-
-                  <div className="phone-card" />
-                  <div className="phone-card second" />
-
-                  <div className="phone-nav">
-                    <i />
-                    <i />
-                    <i />
-                    <i />
+                <div className="grid grid-cols-3 gap-2">
+                  <div className="p-3 bg-slate-800/80 rounded-lg text-center">
+                    <small className="block text-slate-400 text-xs">Students</small>
+                    <strong className="text-indigo-400 text-lg">1,842</strong>
+                  </div>
+                  <div className="p-3 bg-slate-800/80 rounded-lg text-center">
+                    <small className="block text-slate-400 text-xs">Attendance</small>
+                    <strong className="text-emerald-400 text-lg">94.8%</strong>
+                  </div>
+                  <div className="p-3 bg-slate-800/80 rounded-lg text-center">
+                    <small className="block text-slate-400 text-xs">Classes</small>
+                    <strong className="text-indigo-400 text-lg">38</strong>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="stats-grid">
+          <div className="stats-grid grid grid-cols-2 lg:grid-cols-4 gap-4">
             {stats.map((stat) => (
-              <div key={stat.num} className="stat-box">
-                <span>{stat.num}</span>
-
-                <div>
-                  <small>{stat.label}</small>
-                  <strong>{stat.value}</strong>
+              <div key={stat.num} className="stat-box p-5 rounded-xl bg-white border border-slate-200">
+                <span className="font-mono text-indigo-600 font-bold text-xs">{stat.num}</span>
+                <div className="mt-1">
+                  <small className="block text-slate-500 text-xs font-semibold">{stat.label}</small>
+                  <strong className="text-slate-950 font-bold text-base">{stat.value}</strong>
                 </div>
               </div>
             ))}
@@ -656,41 +522,34 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="solutions" className="section solutions-section">
-        <div className="container">
-          <div className="section-intro centered">
-            <span className="section-kicker">03 / WHAT WE DO</span>
-
-            <h2>
-              Solutions built around <em>real operations.</em>
+      {/* SOLUTIONS SECTION */}
+      <section id="solutions" className="section py-20 px-6 bg-white border-t border-slate-200">
+        <div className="container max-w-7xl mx-auto space-y-12">
+          <div className="section-intro text-center max-w-2xl mx-auto space-y-2">
+            <span className="section-kicker font-bold text-indigo-600 text-xs tracking-widest uppercase">03 / WHAT WE DO</span>
+            <h2 className="text-3xl font-extrabold text-slate-950">
+              Solutions built for <em className="italic text-indigo-600">modern operations.</em>
             </h2>
-
-            <p>
-              From flagship products to tailored technology initiatives, we
-              focus on practical systems that create clarity, speed and better
-              experiences.
+            <p className="text-slate-700 text-base font-normal">
+              We construct tailored technology strategies that bring precision, speed, and reliability to business processes.
             </p>
           </div>
 
-          <div className="solution-grid">
+          <div className="solution-grid grid grid-cols-1 md:grid-cols-3 gap-8">
             {solutions.map((solution, index) => {
               const SolutionIcon = solution.icon;
-
               return (
-                <article className="solution-card" key={solution.title}>
-                  <div className="solution-index">
-                    0{index + 1}
+                <article className="solution-card p-8 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between space-y-4" key={solution.title}>
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center">
+                      <div className="text-indigo-600">
+                        <SolutionIcon size={28} />
+                      </div>
+                      <span className="font-mono text-slate-400 text-xs font-bold">0{index + 1}</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-950">{solution.title}</h3>
+                    <p className="text-slate-700 text-sm leading-relaxed">{solution.text}</p>
                   </div>
-
-                  <div className="solution-icon">
-                    <SolutionIcon />
-                  </div>
-
-                  <h3>{solution.title}</h3>
-
-                  <p>{solution.text}</p>
-
-                  <div className="solution-line" />
                 </article>
               );
             })}
@@ -698,566 +557,295 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="technology" className="section technology-section">
-        <div className="container tech-grid">
-          <div>
-            <span className="section-kicker">04 / TECHNOLOGY</span>
-
-            <h2>
-              Modern architecture. <em>Practical engineering.</em>
+      {/* TECH SECTION */}
+      <section id="technology" className="section py-20 px-6 bg-slate-900 text-white">
+        <div className="container max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="space-y-6">
+            <span className="section-kicker font-bold text-indigo-400 text-xs tracking-widest uppercase">04 / ARCHITECTURE</span>
+            <h2 className="text-3xl font-extrabold leading-tight">
+              Modern architecture. <br />
+              <em className="italic text-indigo-300">Dependable engineering.</em>
             </h2>
-
-            <p>
-              We think beyond screens. Our products are shaped around secure
-              architecture, reusable systems, clear interfaces, connected data
-              and the ability to evolve.
+            <p className="text-slate-300 text-base leading-relaxed">
+              Our systems are architected with security, clean data structures, and continuous scalability at the core.
             </p>
 
             <button
               type="button"
-              className="outline-btn"
+              className="outline-btn border border-slate-700 hover:bg-slate-800 text-white font-semibold px-6 py-3 rounded-lg transition-all inline-flex items-center gap-2"
               onClick={() => scrollTo('contact')}
             >
-              Start a conversation
+              Start a Conversation
               <ArrowRight size={16} />
             </button>
           </div>
 
-          <div className="tech-visual">
-            <div className="tech-core">
-              <Cpu size={28} />
-
-              <strong>
-                SKILLFORGE
-                <br />
-                <span>ENGINEERING LAYER</span>
-              </strong>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="p-5 bg-slate-800/80 rounded-xl border border-slate-700 flex items-center gap-3">
+              <Cloud className="text-indigo-400" size={20} />
+              <span className="font-bold text-sm">Cloud Infrastructure</span>
             </div>
-
-            <div className="tech-node n1">
-              <Cloud size={17} />
-              Cloud
+            <div className="p-5 bg-slate-800/80 rounded-xl border border-slate-700 flex items-center gap-3">
+              <MonitorSmartphone className="text-indigo-400" size={20} />
+              <span className="font-bold text-sm">Web &amp; Mobile</span>
             </div>
-
-            <div className="tech-node n2">
-              <MonitorSmartphone size={17} />
-              Web + Mobile
+            <div className="p-5 bg-slate-800/80 rounded-xl border border-slate-700 flex items-center gap-3">
+              <ShieldCheck className="text-indigo-400" size={20} />
+              <span className="font-bold text-sm">Security &amp; Auth</span>
             </div>
-
-            <div className="tech-node n3">
-              <ShieldCheck size={17} />
-              Security
-            </div>
-
-            <div className="tech-node n4">
-              <BarChart3 size={17} />
-              Data
-            </div>
-
-            <div className="tech-lines">
-              <span />
-              <span />
-              <span />
-              <span />
+            <div className="p-5 bg-slate-800/80 rounded-xl border border-slate-700 flex items-center gap-3">
+              <BarChart3 className="text-indigo-400" size={20} />
+              <span className="font-bold text-sm">Data Analytics</span>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="section cta-section">
-        <div className="container cta-inner">
-          <div>
-            <span className="section-kicker">LET&apos;S BUILD</span>
-
-            <h2>
-              Have a challenge worth <em>solving?</em>
-            </h2>
-
-            <p>
-              Tell us what you&apos;re building, changing or trying to improve.
-              Let&apos;s turn the idea into something useful.
-            </p>
-          </div>
-
+      {/* CALL TO ACTION */}
+      <section className="section py-16 px-6 bg-indigo-600 text-white text-center">
+        <div className="container max-w-4xl mx-auto space-y-6">
+          <span className="text-xs font-bold tracking-widest uppercase text-indigo-200">LET'S BUILD</span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold">Have a project or operation ready to upgrade?</h2>
+          <p className="text-indigo-100 text-base max-w-xl mx-auto">
+            Share your goals with our team and let&apos;s build software that generates lasting value.
+          </p>
           <button
             type="button"
-            className="primary-btn large"
+            className="primary-btn bg-slate-950 hover:bg-slate-900 text-white font-semibold px-8 py-3.5 rounded-lg shadow-lg inline-flex items-center gap-2"
             onClick={() => scrollTo('contact')}
           >
-            Start a conversation
+            Start a Conversation
             <ArrowRight size={18} />
           </button>
         </div>
       </section>
 
-      
-      {/* TEAM */}
-      <section id="team" className="section team-section">
-        <div className="container">
-          <div className="section-intro centered team-heading">
-            <span className="section-kicker">05 / OUR TEAM</span>
-
-            <h2>
-              Meet the people behind <em>SkillForge.</em>
+      {/* TEAM SECTION (REORGANIZED & COMPACT) */}
+      <section id="team" className="section py-20 px-6 bg-white border-b border-slate-200">
+        <div className="container max-w-7xl mx-auto space-y-12">
+          <div className="section-intro text-center max-w-2xl mx-auto space-y-2">
+            <span className="section-kicker font-bold text-indigo-600 text-xs tracking-widest uppercase">05 / OUR TEAM</span>
+            <h2 className="text-3xl font-extrabold text-slate-950">
+              Meet the minds behind <em className="italic text-indigo-600">SkillForge.</em>
             </h2>
-
-            <p>
-              A growing team focused on building meaningful products,
-              supporting our customers and helping organisations get more
-              value from technology.
+            <p className="text-slate-700 text-base font-normal">
+              Click any photo icon below to view full details and background.
             </p>
           </div>
 
-          {/* FOUNDER */}
-          <div className="team-profile founder-profile">
-            <div className="team-photo-wrap">
-              <div className="team-photo-frame">
-                <Image
-                  src="/mypix.jpeg"
-                  alt="Engr. Martin Agoha"
-                  width={620}
-                  height={760}
-                  className="team-photo"
-                />
-              </div>
-
-              <div className="team-photo-label">
-                <span>SKILLFORGE / 01</span>
-                <strong>Founder &amp; Technology Lead</strong>
-              </div>
-            </div>
-
-            <div className="team-bio">
-              <span className="team-role">ENGR. MARTIN AGOHA</span>
-
-              <h3>
-                Building technology with
-                <em> purpose.</em>
-              </h3>
-
-              <p>
-                Engr. Martin Agoha is the driving force behind SkillForge
-                Technologies &amp; Solutions Ltd, with a focus on technology,
-                product development and practical digital solutions.
-              </p>
-
-              <p>
-                Through SkillForge, he is building products that bring
-                technology closer to everyday organisations and the people
-                they serve. His flagship initiative is <strong>CoreOne</strong>,
-                a connected education technology platform designed to simplify
-                school operations, learning, communication and digital
-                experiences.
-              </p>
-
-              <p>
-                His approach combines engineering, product thinking and a
-                commitment to building systems that are clear, useful,
-                scalable and designed around real-world needs.
-              </p>
-
-              <div className="team-highlights">
-                <div>
-                  <span>01</span>
-                  <strong>Product Development</strong>
-                  <p>Turning ideas into practical digital products.</p>
+          {/* INTERACTIVE TEAM AVATAR GRID */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 max-w-4xl mx-auto">
+            {teamMembers.map((member) => (
+              <button
+                key={member.id}
+                type="button"
+                onClick={() => setSelectedMember(member)}
+                className="group flex flex-col items-center text-center space-y-3 p-4 rounded-xl bg-slate-50 hover:bg-indigo-50/60 border border-slate-200 hover:border-indigo-300 transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              >
+                <div className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-slate-300 group-hover:border-indigo-600 transition-all shadow-sm">
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform"
+                  />
                 </div>
-
                 <div>
-                  <span>02</span>
-                  <strong>Technology</strong>
-                  <p>Designing modern systems built for growth.</p>
+                  <h3 className="text-sm font-bold text-slate-950 group-hover:text-indigo-600 transition-colors line-clamp-1">{member.name}</h3>
+                  <p className="text-xs font-semibold text-slate-600 line-clamp-1">{member.role}</p>
                 </div>
-
-                <div>
-                  <span>03</span>
-                  <strong>Innovation</strong>
-                  <p>Using technology to solve meaningful problems.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* SALES & SUPPORT TEAM */}
-          <div className="team-members-grid">
-
-            <article className="team-member-card">
-              <div className="team-member-image">
-                <Image
-                  src="/Eli.png"
-                  alt="Mr Etim Elijah Ime"
-                  width={500}
-                  height={600}
-                  className="team-member-photo"
-                />
-              </div>
-
-              <div className="team-member-content">
-                <span className="team-member-number">02</span>
-                <span className="team-member-role">SALES MANAGER</span>
-
-                <h3>Mr Etim Elijah Ime</h3>
-
-                <p>
-                  Leads sales and business development, helping schools and
-                  organisations discover the value of SkillForge solutions and
-                  CoreOne while building strong customer relationships.
-                </p>
-              </div>
-            </article>
-
-
-            <article className="team-member-card">
-              <div className="team-member-image">
-                <Image
-                  src="/victor.png"
-                  alt="Mr Victor"
-                  width={500}
-                  height={600}
-                  className="team-member-photo"
-                />
-              </div>
-
-              <div className="team-member-content">
-                <span className="team-member-number">03</span>
-                <span className="team-member-role">
-                  PRODUCT TECHNICAL SUPPORT / SALES
+                <span className="text-[10px] font-bold text-indigo-600 bg-indigo-100 px-2 py-0.5 rounded-full">
+                  View Profile
                 </span>
-
-                <h3>Mr Victor</h3>
-
-                <p>
-                  Supports customers with product-related technical needs while
-                  helping prospective users understand CoreOne, its features
-                  and how it can fit their operational requirements.
-                </p>
-              </div>
-            </article>
-
-
-            <article className="team-member-card">
-              <div className="team-member-image">
-                <Image
-                  src="/ejike.jpeg"
-                  alt="Mr Ejike"
-                  width={500}
-                  height={600}
-                  className="team-member-photo"
-                />
-              </div>
-
-              <div className="team-member-content">
-                <span className="team-member-number">03</span>
-                <span className="team-member-role">
-                  PRODUCT TECHNICAL SUPPORT / SALES
-                </span>
-
-                <h3>Mr Ejike</h3>
-
-                <p>
-                  Supports customers with product-related technical needs while
-                  helping prospective users understand CoreOne, its features
-                  and how it can fit their operational requirements.
-                </p>
-              </div>
-            </article>
-
-            <article className="team-member-card">
-              <div className="team-member-image">
-                <Image
-                  src="/favour.png"
-                  alt="Mr Favour Ekezie"
-                  width={500}
-                  height={600}
-                  className="team-member-photo"
-                />
-              </div>
-
-              <div className="team-member-content">
-                <span className="team-member-number">04</span>
-                <span className="team-member-role">
-                  PRODUCT TECHNICAL SUPPORT / SALES
-                </span>
-
-                <h3>Mr Favour Ekezie</h3>
-
-                <p>
-                  Combines technical product support with customer engagement,
-                  helping users adopt CoreOne effectively while supporting
-                  product demonstrations and sales conversations.
-                </p>
-              </div>
-            </article>
-
-          </div>
-
-          <div className="team-bottom-note">
-            <span>SKILLFORGE / TEAM</span>
-            <p>
-              Technology, product, support and business development working
-              together to move great ideas forward.
-            </p>
+              </button>
+            ))}
           </div>
         </div>
       </section>
 
+      {/* TEAM MEMBER MODAL POPUP */}
+      {selectedMember && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-fadeIn">
+          <div className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden max-h-[90vh] flex flex-col">
+            {/* Modal Header */}
+            <div className="flex justify-between items-center p-6 border-b border-slate-200 bg-slate-50">
+              <div className="flex items-center gap-3">
+                <span className="font-mono text-indigo-600 font-bold text-sm">
+                  {selectedMember.number}
+                </span>
+                <div>
+                  <h3 className="text-xl font-bold text-slate-950">{selectedMember.name}</h3>
+                  <p className="text-xs font-semibold text-indigo-600 uppercase tracking-wider">{selectedMember.role}</p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSelectedMember(null)}
+                className="p-2 text-slate-500 hover:text-slate-950 hover:bg-slate-200 rounded-full transition-colors"
+                aria-label="Close modal"
+              >
+                <X size={20} />
+              </button>
+            </div>
 
-<section id="contact" className="section contact-section">
-        <div className="container contact-grid">
-          <div>
-            <span className="section-kicker">06 / CONTACT</span>
+            {/* Modal Body */}
+            <div className="p-6 overflow-y-auto space-y-6">
+              <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-start">
+                <div className="relative w-32 h-32 rounded-xl overflow-hidden border border-slate-200 shadow-md flex-shrink-0">
+                  <Image
+                    src={selectedMember.image}
+                    alt={selectedMember.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="space-y-3 text-slate-700 text-sm leading-relaxed">
+                  {selectedMember.bio.map((paragraph, idx) => (
+                    <p key={idx}>{paragraph}</p>
+                  ))}
+                </div>
+              </div>
 
-            <h2>
-              Let&apos;s make <em>something meaningful.</em>
+              {selectedMember.highlights && (
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-200">
+                  {selectedMember.highlights.map((item) => (
+                    <div key={item.number} className="bg-slate-50 p-3 rounded-lg border border-slate-200">
+                      <span className="font-mono text-xs font-bold text-indigo-600">{item.number}</span>
+                      <strong className="block text-slate-950 text-xs font-bold mt-1">{item.title}</strong>
+                      <p className="text-[11px] text-slate-600 mt-1">{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-4 border-t border-slate-200 bg-slate-50 text-right">
+              <button
+                type="button"
+                onClick={() => setSelectedMember(null)}
+                className="px-5 py-2 bg-slate-900 hover:bg-slate-800 text-white font-medium text-xs rounded-lg transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* CONTACT SECTION */}
+      <section id="contact" className="section py-20 px-6 bg-slate-50">
+        <div className="container max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="space-y-6">
+            <span className="section-kicker font-bold text-indigo-600 text-xs tracking-widest uppercase">06 / CONTACT</span>
+            <h2 className="text-3xl font-extrabold text-slate-950">
+              Let&apos;s build <em className="italic text-indigo-600">together.</em>
             </h2>
-
-            <p>
-              For CoreOne enquiries, partnerships, product support or
-              technology projects, SkillForge is ready to hear from you.
+            <p className="text-slate-700 text-base">
+              Reach out for product inquiries, CoreOne software demos, or custom software projects.
             </p>
 
-            <div className="contact-links">
-              <a href="tel:08035269983">
-                <span>01</span>
-
+            <div className="contact-links space-y-4 pt-4">
+              <a href="tel:08035269983" className="flex items-center justify-between p-4 bg-white border border-slate-200 rounded-xl hover:border-indigo-400 transition-colors">
                 <div>
-                  <small>Calls</small>
-                  <strong>08035269983</strong>
+                  <small className="text-xs font-bold text-slate-500 uppercase block">Phone</small>
+                  <strong className="text-slate-950 text-base">08035269983</strong>
                 </div>
-
-                <ArrowRight />
+                <ArrowRight className="text-slate-400" size={18} />
               </a>
 
-              <a
-                href="https://wa.me/2349045531092"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span>02</span>
-
+              <a href="https://wa.me/2349045531092" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-4 bg-white border border-slate-200 rounded-xl hover:border-indigo-400 transition-colors">
                 <div>
-                  <small>WhatsApp</small>
-                  <strong>09045531092</strong>
+                  <small className="text-xs font-bold text-slate-500 uppercase block">WhatsApp</small>
+                  <strong className="text-slate-950 text-base">09045531092</strong>
                 </div>
-
-                <ArrowRight />
+                <ArrowRight className="text-slate-400" size={18} />
               </a>
 
-              <a href="mailto:skillforge82@gmail.com">
-                <span>03</span>
-
+              <a href="mailto:skillforge82@gmail.com" className="flex items-center justify-between p-4 bg-white border border-slate-200 rounded-xl hover:border-indigo-400 transition-colors">
                 <div>
-                  <small>Email</small>
-                  <strong>skillforge82@gmail.com</strong>
+                  <small className="text-xs font-bold text-slate-500 uppercase block">Email</small>
+                  <strong className="text-slate-950 text-base">skillforge82@gmail.com</strong>
                 </div>
-
-                <ArrowRight />
+                <ArrowRight className="text-slate-400" size={18} />
               </a>
             </div>
           </div>
 
-          <form
-            className="contact-form"
-            onSubmit={handleFormSubmit}
-          >
-            <div className="form-title">
-              <MessageCircle size={19} />
-              <span>Send an enquiry</span>
+          <form className="contact-form bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4" onSubmit={handleFormSubmit}>
+            <div className="form-title flex items-center gap-2 font-bold text-slate-950 border-b border-slate-200 pb-4">
+              <MessageCircle size={20} className="text-indigo-600" />
+              <span>Send Us a Message</span>
             </div>
 
             {formState.succeeded ? (
-              <div className="form-success">
-                <div className="form-success-icon">
-                  <ShieldCheck size={20} />
+              <div className="form-success p-6 bg-emerald-50 border border-emerald-200 rounded-xl text-center space-y-2">
+                <div className="form-success-icon inline-flex p-2 bg-emerald-100 text-emerald-700 rounded-full">
+                  <ShieldCheck size={24} />
                 </div>
-
-                <h3>Thank you. Your enquiry has been received.</h3>
-
-                <p>
-                  Our team will review your message and get back to you as soon
-                  as possible.
-                </p>
+                <h3 className="font-bold text-slate-950">Message Sent Successfully!</h3>
+                <p className="text-slate-700 text-xs">Our team will get back to you shortly.</p>
               </div>
             ) : (
               <>
-                <input
-                  type="hidden"
-                  name="_subject"
-                  value="New SkillForge Website Enquiry"
-                />
+                <input type="hidden" name="_subject" value="New SkillForge Website Enquiry" />
 
-                <label>
-                  Name
-                  <input
-                    name="name"
-                    type="text"
-                    placeholder="Your full name"
-                    autoComplete="name"
-                    required
-                  />
-                </label>
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-slate-700">Full Name</label>
+                  <input name="name" type="text" placeholder="Your full name" required className="w-full p-3 border border-slate-300 rounded-lg text-slate-900 text-sm focus:outline-none focus:border-indigo-600" />
+                </div>
 
-                <label>
-                  Email
-                  <input
-                    name="email"
-                    type="email"
-                    placeholder="you@company.com"
-                    autoComplete="email"
-                    required
-                  />
-                </label>
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-slate-700">Email Address</label>
+                  <input name="email" type="email" placeholder="you@company.com" required className="w-full p-3 border border-slate-300 rounded-lg text-slate-900 text-sm focus:outline-none focus:border-indigo-600" />
+                </div>
 
-                <label>
-                  Phone
-                  <input
-                    name="phone"
-                    type="tel"
-                    placeholder="08035269983"
-                    autoComplete="tel"
-                  />
-                </label>
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-slate-700">Phone Number</label>
+                  <input name="phone" type="tel" placeholder="08035269983" className="w-full p-3 border border-slate-300 rounded-lg text-slate-900 text-sm focus:outline-none focus:border-indigo-600" />
+                </div>
 
-                <label>
-                  What can we help with?
-                  <select name="area" defaultValue="" required>
-                    <option value="" disabled>
-                      Select an area
-                    </option>
-
-                    <option value="CoreOne">CoreOne</option>
-                    <option value="Technology solutions">
-                      Technology solutions
-                    </option>
-                    <option value="Partnership">
-                      Partnership
-                    </option>
-                    <option value="Product support">
-                      Product support
-                    </option>
-                    <option value="Other">Other</option>
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-slate-700">Topic</label>
+                  <select name="area" defaultValue="" required className="w-full p-3 border border-slate-300 rounded-lg text-slate-900 text-sm focus:outline-none focus:border-indigo-600">
+                    <option value="" disabled>Select an area</option>
+                    <option value="CoreOne">CoreOne Platform</option>
+                    <option value="Technology solutions">Custom Software</option>
+                    <option value="Partnership">Partnership</option>
+                    <option value="Product support">Support</option>
                   </select>
-                </label>
+                </div>
 
-                <label>
-                  Message
-                  <textarea
-                    name="message"
-                    rows={5}
-                    placeholder="Tell us a little about what you need..."
-                    required
-                  />
-                </label>
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-slate-700">Message</label>
+                  <textarea name="message" rows={4} placeholder="How can we help you?" required className="w-full p-3 border border-slate-300 rounded-lg text-slate-900 text-sm focus:outline-none focus:border-indigo-600" />
+                </div>
 
-                {formState.errors && (
-                  <p className="form-error">
-                    Something went wrong while sending your enquiry. Please
-                    try again.
-                  </p>
-                )}
-
-                <button
-                  className="primary-btn"
-                  type="submit"
-                  disabled={formState.submitting}
-                >
-                  {formState.submitting
-                    ? 'Sending enquiry...'
-                    : 'Send enquiry'}
-
+                <button className="primary-btn w-full bg-slate-950 hover:bg-slate-900 text-white font-semibold py-3 rounded-lg shadow-md transition-all flex items-center justify-center gap-2" type="submit" disabled={formState.submitting}>
+                  {formState.submitting ? 'Sending...' : 'Send Message'}
                   <ArrowRight size={16} />
                 </button>
-
-                <p className="form-note">
-                  Your enquiry will be securely submitted through Formspree.
-                </p>
               </>
             )}
           </form>
         </div>
       </section>
 
-      <footer className="site-footer">
-        <div className="container footer-top">
-          <div className="footer-brand">
-            <span className="brand-logo footer-logo">
-              <Image
-                src="/logo.png"
-                alt="SkillForge Technologies & Solutions Ltd"
-                width={150}
-                height={48}
-              />
-            </span>
-
-            <div>
-              <strong>SKILLFORGE</strong>
-              <small>Technologies &amp; Solutions Ltd</small>
-            </div>
+      {/* FOOTER */}
+      <footer className="site-footer bg-slate-950 text-white py-12 px-6 border-t border-slate-800">
+        <div className="container max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="footer-brand flex items-center gap-3">
+            <Image src="/logo.png" alt="SkillForge Technologies" width={140} height={45} />
+            <span className="font-bold text-sm tracking-wide">SKILLFORGE</span>
           </div>
 
-          <div className="footer-links">
-            <button type="button" onClick={() => scrollTo('company')}>
-              Company
-            </button>
-
-            <button type="button" onClick={() => scrollTo('coreone')}>
-              CoreOne
-            </button>
-
-            <button type="button" onClick={() => scrollTo('solutions')}>
-              Solutions
-            </button>
-
-            <button type="button" onClick={() => scrollTo('team')}>
-              Team
-            </button>
-
-            <button type="button" onClick={() => scrollTo('contact')}>
-              Contact
-            </button>
+          <div className="text-slate-400 text-xs">
+            © 2026 SkillForge Technologies &amp; Solutions Ltd. All rights reserved.
           </div>
 
-          <div className="contact-details">
-            <a className="contact-detail" href="tel:08035269983">
-              <span>Calls</span>
-              <strong>08035269983</strong>
-            </a>
-
-            <a
-              className="contact-detail"
-              href="https://wa.me/2349045531092"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span>WhatsApp</span>
-              <strong>09045531092</strong>
-            </a>
-
-            <a
-              className="contact-detail"
-              href="mailto:skillforge82@gmail.com"
-            >
-              <span>Email</span>
-              <strong>skillforge82@gmail.com</strong>
-            </a>
-          </div>
-
-          <button
-            type="button"
-            className="back-top"
-            onClick={() => scrollTo('home')}
-          >
+          <button type="button" className="text-slate-300 hover:text-white text-xs font-semibold" onClick={() => scrollTo('home')}>
             Back to top ↑
           </button>
-        </div>
-
-        <div className="container footer-bottom">
-          <span>
-            © 2026 SkillForge Technologies &amp; Solutions Ltd. All rights
-            reserved.
-          </span>
-
-          <span>Building what moves tomorrow.</span>
         </div>
       </footer>
     </main>
