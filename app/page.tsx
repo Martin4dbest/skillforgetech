@@ -906,6 +906,35 @@ export default function Home() {
               </div>
             </article>
 
+
+            <article className="team-member-card">
+              <div className="team-member-image">
+                <Image
+                  src="/victor.png"
+                  alt="Mr Victor"
+                  width={500}
+                  height={600}
+                  className="team-member-photo"
+                />
+              </div>
+
+              <div className="team-member-content">
+                <span className="team-member-number">03</span>
+                <span className="team-member-role">
+                  PRODUCT TECHNICAL SUPPORT / SALES
+                </span>
+
+                <h3>Mr Victor</h3>
+
+                <p>
+                  Supports customers with product-related technical needs while
+                  helping prospective users understand CoreOne, its features
+                  and how it can fit their operational requirements.
+                </p>
+              </div>
+            </article>
+
+
             <article className="team-member-card">
               <div className="team-member-image">
                 <Image
