@@ -44,76 +44,129 @@ type Stat = {
   value: string;
 };
 
+type TeamMember = {
+  id: string;
+  name: string;
+  role: string;
+  image: string;
+  number: string;
+  bio: string[];
+  highlights?: { number: string; title: string; desc: string }[];
+};
+
 const solutions: Solution[] = [
   {
     icon: GraduationCap,
-    title: 'Education Technology',
-    text: 'Digital infrastructure that brings school operations, learning, communication and insight into one connected ecosystem.',
+    title: 'EdTech Solutions',
+    text: 'Digital infrastructure bringing school operations, learning, and communication into one unified platform.',
   },
   {
     icon: Code2,
     title: 'Software & Product Engineering',
-    text: 'Purpose-built web and mobile products designed around real workflows, real users and measurable outcomes.',
+    text: 'Purpose-built web and mobile products engineered for real workflows and measurable outcomes.',
   },
   {
     icon: Network,
     title: 'Digital Transformation',
-    text: 'Modernise manual processes with connected systems, automation, data and practical technology strategy.',
+    text: 'Modernize manual processes with connected systems, automation, and practical technology strategy.',
   },
 ];
 
 const coreOneFeatures: CoreOneFeature[] = [
   {
     title: 'School Administration',
-    text: 'A central workspace for everyday school operations and records.',
+    text: 'A central workspace for day-to-day school operations and records.',
     icon: Layers3,
   },
   {
-    title: 'Student & Parent Experience',
-    text: 'One connected digital experience for students, families and administrators.',
+    title: 'Student & Parent Portals',
+    text: 'One connected digital experience for students, families, and administrators.',
     icon: UsersRound,
   },
   {
     title: 'Learning & Assessment',
-    text: 'Attendance, CBT, ebooks, results and learning tools in one ecosystem.',
+    text: 'Attendance, CBT, gradebooks, results, and learning tools in one place.',
     icon: BookOpen,
   },
   {
     title: 'Security & Access',
-    text: 'Role-based access and school-aware controls designed for multi-tenant environments.',
+    text: 'Role-based access control built for multi-tenant educational institutions.',
     icon: ShieldCheck,
   },
 ];
 
 const stats: Stat[] = [
+  { num: '01', label: 'Flagship Product', value: 'CoreOne' },
+  { num: '02', label: 'Experience Layers', value: 'Web + Mobile' },
+  { num: '03', label: 'Core Focus', value: 'People + Data' },
+  { num: '04', label: 'Built For', value: 'Scale' },
+];
+
+const teamMembers: TeamMember[] = [
   {
-    num: '01',
-    label: 'Flagship Product',
-    value: 'CoreOne',
+    id: 'martin',
+    name: 'Engr. Martin Agoha',
+    role: 'Founder & Technology Lead',
+    image: '/mypix.jpeg',
+    number: '01',
+    bio: [
+      'Engr. Martin Agoha is the driving force behind SkillForge Technologies & Solutions Ltd, with a focus on technology, product development, and practical digital solutions.',
+      'Through SkillForge, he builds products that bring technology closer to everyday organizations and the people they serve. His flagship initiative is CoreOne, a connected education technology platform designed to simplify school operations, learning, and communication.',
+      'His approach combines engineering, product thinking, and a commitment to building systems that are clear, useful, scalable, and designed around real-world needs.',
+    ],
+    highlights: [
+      { number: '01', title: 'Product Development', desc: 'Turning ideas into practical digital products.' },
+      { number: '02', title: 'Technology', desc: 'Designing modern systems built for growth.' },
+      { number: '03', title: 'Innovation', desc: 'Using technology to solve meaningful problems.' },
+    ],
   },
   {
-    num: '02',
-    label: 'Experience Layers',
-    value: 'Web + Mobile',
+    id: 'elime',
+    name: 'Mr Etim Elijah Ime',
+    role: 'Sales Manager',
+    image: '/Eli.png',
+    number: '02',
+    bio: [
+      'Leads sales and business development, helping schools and organizations discover the value of SkillForge solutions and CoreOne while building strong customer relationships.',
+    ],
   },
   {
-    num: '03',
-    label: 'Core Focus',
-    value: 'People + Process + Data',
+    id: 'victor',
+    name: 'Mr Victor',
+    role: 'Product Technical Support / Sales',
+    image: '/victor.png',
+    number: '03',
+    bio: [
+      'Supports customers with product-related technical needs while helping prospective users understand CoreOne, its features, and operational setup.',
+    ],
   },
   {
-    num: '04',
-    label: 'Built For',
-    value: 'Scale',
+    id: 'ejike',
+    name: 'Mr Ejike',
+    role: 'Product Technical Support / Sales',
+    image: '/ejike.jpeg',
+    number: '04',
+    bio: [
+      'Supports customers with product-related technical needs while helping prospective users understand CoreOne, its features, and operational setup.',
+    ],
+  },
+  {
+    id: 'favour',
+    name: 'Mr Favour Ekezie',
+    role: 'Product Technical Support / Sales',
+    image: '/favour.png',
+    number: '05',
+    bio: [
+      'Combines technical product support with customer engagement, helping users adopt CoreOne effectively while supporting product demonstrations.',
+    ],
   },
 ];
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
 
-  const formId =
-    process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID || 'xrpggbar';
-
+  const formId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID || 'xrpggbar';
   const [formState, handleFormSubmit] = useForm(formId);
 
   const scrollTo = (id: string) => {
@@ -121,12 +174,11 @@ export default function Home() {
       behavior: 'smooth',
       block: 'start',
     });
-
     setMenuOpen(false);
   };
 
   return (
-    <main className="site-shell">
+    <main className="site-shell" style={{ color: '#090d16', fontSize: '1.05rem', lineHeight: '1.6' }}>
       <div className="ambient ambient-a" />
       <div className="ambient ambient-b" />
 
@@ -149,38 +201,22 @@ export default function Home() {
             </span>
 
             <span className="brand-copy">
-              <strong>SKILLFORGE</strong>
-              <small>Technologies &amp; Solutions Ltd</small>
+              <strong style={{ color: '#020617', fontSize: '1.15rem' }}>SKILLFORGE</strong>
+              <small style={{ color: '#0f172a', fontSize: '0.85rem', fontWeight: 600 }}>Technologies &amp; Solutions Ltd</small>
             </span>
           </button>
 
           <nav
             className={`main-nav ${menuOpen ? 'open' : ''}`}
             aria-label="Main navigation"
+            style={{ color: '#020617', fontSize: '1rem', fontWeight: 600 }}
           >
-            <button type="button" onClick={() => scrollTo('company')}>
-              Company
-            </button>
-
-            <button type="button" onClick={() => scrollTo('coreone')}>
-              CoreOne
-            </button>
-
-            <button type="button" onClick={() => scrollTo('solutions')}>
-              Solutions
-            </button>
-
-            <button type="button" onClick={() => scrollTo('technology')}>
-              Technology
-            </button>
-
-            <button type="button" onClick={() => scrollTo('team')}>
-              Team
-            </button>
-
-            <button type="button" onClick={() => scrollTo('contact')}>
-              Contact
-            </button>
+            <button type="button" onClick={() => scrollTo('company')}>Company</button>
+            <button type="button" onClick={() => scrollTo('coreone')}>CoreOne</button>
+            <button type="button" onClick={() => scrollTo('solutions')}>Solutions</button>
+            <button type="button" onClick={() => scrollTo('technology')}>Technology</button>
+            <button type="button" onClick={() => scrollTo('team')}>Team</button>
+            <button type="button" onClick={() => scrollTo('contact')}>Contact</button>
           </nav>
 
           <button
@@ -207,20 +243,17 @@ export default function Home() {
       <section id="home" className="hero">
         <div className="container hero-grid">
           <div className="hero-copy">
-            <div className="eyebrow">
+            <div className="eyebrow" style={{ color: '#020617', fontWeight: 700, fontSize: '0.95rem' }}>
               <span className="pulse-dot" />
               Technology. Products. Possibility.
             </div>
 
-            <h1>
+            <h1 style={{ color: '#020617', fontSize: '3rem', lineHeight: '1.15', fontWeight: 800 }}>
               We build digital products that <em>move people forward.</em>
             </h1>
 
-            <p>
-              SkillForge Technologies &amp; Solutions Ltd is a product-driven
-              technology company building modern software, digital platforms
-              and practical solutions for organisations ready to operate
-              smarter.
+            <p style={{ color: '#0f172a', fontSize: '1.25rem', lineHeight: '1.7', fontWeight: 500 }}>
+              SkillForge Technologies &amp; Solutions Ltd is a product-driven company building modern software, digital platforms, and practical solutions for forward-thinking organizations.
             </p>
 
             <div className="hero-actions">
@@ -237,6 +270,7 @@ export default function Home() {
                 type="button"
                 className="ghost-btn"
                 onClick={() => scrollTo('company')}
+                style={{ color: '#020617', fontWeight: 700 }}
               >
                 <span className="play">
                   <Play size={13} fill="currentColor" />
@@ -247,18 +281,18 @@ export default function Home() {
 
             <div className="hero-proof">
               <div>
-                <span>01</span>
-                <p>Company behind CoreOne</p>
+                <span style={{ color: '#020617', fontSize: '1.5rem', fontWeight: 800 }}>01</span>
+                <p style={{ color: '#0f172a', fontSize: '0.95rem', fontWeight: 600 }}>Company behind CoreOne</p>
               </div>
 
               <div>
-                <span>∞</span>
-                <p>Built to grow with you</p>
+                <span style={{ color: '#020617', fontSize: '1.5rem', fontWeight: 800 }}>∞</span>
+                <p style={{ color: '#0f172a', fontSize: '0.95rem', fontWeight: 600 }}>Built to grow with you</p>
               </div>
 
               <div>
-                <span>24/7</span>
-                <p>Digital-first mindset</p>
+                <span style={{ color: '#020617', fontSize: '1.5rem', fontWeight: 800 }}>24/7</span>
+                <p style={{ color: '#0f172a', fontSize: '0.95rem', fontWeight: 600 }}>Digital-first mindset</p>
               </div>
             </div>
           </div>
@@ -282,7 +316,7 @@ export default function Home() {
                 C<span>O</span>RE<span className="mini-dot">•</span>ONE
               </div>
 
-              <p>
+              <p style={{ fontSize: '1rem' }}>
                 The connected operating layer for modern schools.
               </p>
 
@@ -379,12 +413,6 @@ export default function Home() {
 
           <span>PRODUCT TECHNICAL SUPPORT</span>
           <i />
-
-          <span>PRODUCT DEVELOPMENT</span>
-          <i />
-
-          <span>EDTECH</span>
-          <i />
         </div>
       </section>
 
@@ -392,18 +420,16 @@ export default function Home() {
         <div className="container">
           <div className="section-intro split">
             <div>
-              <span className="section-kicker">01 / THE COMPANY</span>
+              <span className="section-kicker" style={{ color: '#4f46e5', fontWeight: 700, fontSize: '0.85rem' }}>01 / THE COMPANY</span>
 
-              <h2>
+              <h2 style={{ color: '#020617', fontSize: '2.5rem', lineHeight: '1.2' }}>
                 Technology is only powerful when it{' '}
                 <em>solves something real.</em>
               </h2>
             </div>
 
-            <p>
-              We combine product thinking, engineering and business
-              understanding to build technology that is useful today and ready
-              for tomorrow.
+            <p style={{ color: '#0f172a', fontSize: '1.15rem', lineHeight: '1.65' }}>
+              We combine product thinking, engineering, and business understanding to build technology that is useful today and ready for tomorrow.
             </p>
           </div>
 
@@ -411,22 +437,21 @@ export default function Home() {
             <article className="manifesto-card">
               <div className="manifesto-number">SF / 01</div>
 
-              <h3>
+              <h3 style={{ fontSize: '1.75rem', lineHeight: '1.3' }}>
                 Built with purpose.
                 <br />
                 <em>Engineered for impact.</em>
               </h3>
 
-              <p>
-                SkillForge exists to design and deliver technology that
-                improves how organisations work, how people interact with
-                systems, and how decisions are made.
+              <p style={{ fontSize: '1.05rem', lineHeight: '1.6' }}>
+                SkillForge exists to design and deliver technology that improves how organizations work, how people interact with systems, and how decisions are made.
               </p>
 
               <button
                 type="button"
                 className="text-link"
                 onClick={() => scrollTo('contact')}
+                style={{ fontSize: '1rem', fontWeight: 700 }}
               >
                 Work with SkillForge
                 <MoveUpRight size={15} />
@@ -435,41 +460,37 @@ export default function Home() {
 
             <div className="principles">
               <div className="principle">
-                <span>01</span>
+                <span style={{ color: '#4f46e5', fontSize: '1.25rem', fontWeight: 800 }}>01</span>
 
                 <div>
-                  <h4>Product-led</h4>
+                  <h4 style={{ color: '#020617', fontSize: '1.2rem', fontWeight: 700 }}>Product-led</h4>
 
-                  <p>
-                    We build around outcomes, users and the full product
-                    journey — not technology for technology&apos;s sake.
+                  <p style={{ color: '#0f172a', fontSize: '1.05rem' }}>
+                    We build around outcomes and the user journey—not technology for technology&apos;s sake.
                   </p>
                 </div>
               </div>
 
               <div className="principle">
-                <span>02</span>
+                <span style={{ color: '#4f46e5', fontSize: '1.25rem', fontWeight: 800 }}>02</span>
 
                 <div>
-                  <h4>Human-centred</h4>
+                  <h4 style={{ color: '#020617', fontSize: '1.2rem', fontWeight: 700 }}>Human-centred</h4>
 
-                  <p>
-                    Interfaces should feel clear. Systems should feel
-                    understandable. Experiences should respect the people
-                    using them.
+                  <p style={{ color: '#0f172a', fontSize: '1.05rem' }}>
+                    Interfaces should feel clear, systems understandable, and user experiences respectful.
                   </p>
                 </div>
               </div>
 
               <div className="principle">
-                <span>03</span>
+                <span style={{ color: '#4f46e5', fontSize: '1.25rem', fontWeight: 800 }}>03</span>
 
                 <div>
-                  <h4>Built to scale</h4>
+                  <h4 style={{ color: '#020617', fontSize: '1.2rem', fontWeight: 700 }}>Built to scale</h4>
 
-                  <p>
-                    Our architecture and thinking are designed so products can
-                    grow with the organisations they serve.
+                  <p style={{ color: '#0f172a', fontSize: '1.05rem' }}>
+                    Architected so products grow seamlessly alongside the organizations they serve.
                   </p>
                 </div>
               </div>
@@ -482,9 +503,9 @@ export default function Home() {
         <div className="container">
           <div className="coreone-head">
             <div>
-              <span className="section-kicker">02 / FLAGSHIP PRODUCT</span>
+              <span className="section-kicker" style={{ color: '#4f46e5', fontWeight: 700, fontSize: '0.85rem' }}>02 / FLAGSHIP PRODUCT</span>
 
-              <div className="coreone-wordmark">
+              <div className="coreone-wordmark" style={{ color: '#020617', fontSize: '3rem', fontWeight: 900 }}>
                 CORE<span>ONE</span>
               </div>
             </div>
@@ -495,30 +516,26 @@ export default function Home() {
                 In active development
               </span>
 
-              <p>
-                CoreOne is SkillForge&apos;s flagship education technology
-                platform — connecting school administration, learning,
-                communication and insight in one modern ecosystem.
+              <p style={{ color: '#0f172a', fontSize: '1.15rem', lineHeight: '1.6' }}>
+                CoreOne is SkillForge&apos;s flagship EdTech platform—connecting school administration, learning, communication, and analytics in one modern ecosystem.
               </p>
             </div>
           </div>
 
           <div className="coreone-showcase">
             <div className="showcase-copy">
-              <span className="mini-label">
+              <span className="mini-label" style={{ color: '#020617', fontWeight: 700, fontSize: '0.85rem' }}>
                 ONE CORE. EVERY EXPERIENCE.
               </span>
 
-              <h3>
+              <h3 style={{ color: '#020617', fontSize: '2.25rem', lineHeight: '1.2' }}>
                 Run the school.
                 <br />
                 <em>Empower the people.</em>
               </h3>
 
-              <p>
-                From school administrators and teachers to students and
-                parents, CoreOne is designed to give each person the tools,
-                visibility and digital experience they need.
+              <p style={{ color: '#0f172a', fontSize: '1.1rem' }}>
+                Designed to give administrators, teachers, students, and parents the visibility and tools they need.
               </p>
 
               <div className="feature-list">
@@ -526,14 +543,14 @@ export default function Home() {
                   const FeatureIcon = feature.icon;
 
                   return (
-                    <div className="feature-item" key={feature.title}>
-                      <span className="feature-icon">
-                        <FeatureIcon size={18} />
+                    <div className="feature-item" key={feature.title} style={{ background: '#ffffff', borderColor: '#cbd5e1' }}>
+                      <span className="feature-icon" style={{ color: '#4f46e5' }}>
+                        <FeatureIcon size={20} />
                       </span>
 
                       <div>
-                        <b>{feature.title}</b>
-                        <p>{feature.text}</p>
+                        <b style={{ color: '#020617', fontSize: '1.05rem' }}>{feature.title}</b>
+                        <p style={{ color: '#0f172a', fontSize: '0.95rem' }}>{feature.text}</p>
                       </div>
                     </div>
                   );
@@ -643,12 +660,12 @@ export default function Home() {
 
           <div className="stats-grid">
             {stats.map((stat) => (
-              <div key={stat.num} className="stat-box">
-                <span>{stat.num}</span>
+              <div key={stat.num} className="stat-box" style={{ background: '#ffffff', borderColor: '#cbd5e1' }}>
+                <span style={{ color: '#4f46e5', fontSize: '1.25rem', fontWeight: 800 }}>{stat.num}</span>
 
                 <div>
-                  <small>{stat.label}</small>
-                  <strong>{stat.value}</strong>
+                  <small style={{ color: '#0f172a', fontSize: '0.85rem', fontWeight: 700 }}>{stat.label}</small>
+                  <strong style={{ color: '#020617', fontSize: '1.15rem' }}>{stat.value}</strong>
                 </div>
               </div>
             ))}
@@ -659,16 +676,14 @@ export default function Home() {
       <section id="solutions" className="section solutions-section">
         <div className="container">
           <div className="section-intro centered">
-            <span className="section-kicker">03 / WHAT WE DO</span>
+            <span className="section-kicker" style={{ color: '#4f46e5', fontWeight: 700, fontSize: '0.85rem' }}>03 / WHAT WE DO</span>
 
-            <h2>
+            <h2 style={{ color: '#020617', fontSize: '2.5rem' }}>
               Solutions built around <em>real operations.</em>
             </h2>
 
-            <p>
-              From flagship products to tailored technology initiatives, we
-              focus on practical systems that create clarity, speed and better
-              experiences.
+            <p style={{ color: '#0f172a', fontSize: '1.15rem' }}>
+              We focus on practical systems that create clarity, speed, and better experiences.
             </p>
           </div>
 
@@ -677,18 +692,18 @@ export default function Home() {
               const SolutionIcon = solution.icon;
 
               return (
-                <article className="solution-card" key={solution.title}>
-                  <div className="solution-index">
+                <article className="solution-card" key={solution.title} style={{ background: '#ffffff', borderColor: '#cbd5e1' }}>
+                  <div className="solution-index" style={{ color: '#64748b', fontWeight: 700 }}>
                     0{index + 1}
                   </div>
 
-                  <div className="solution-icon">
-                    <SolutionIcon />
+                  <div className="solution-icon" style={{ color: '#4f46e5' }}>
+                    <SolutionIcon size={32} />
                   </div>
 
-                  <h3>{solution.title}</h3>
+                  <h3 style={{ color: '#020617', fontSize: '1.35rem' }}>{solution.title}</h3>
 
-                  <p>{solution.text}</p>
+                  <p style={{ color: '#0f172a', fontSize: '1.05rem', lineHeight: '1.6' }}>{solution.text}</p>
 
                   <div className="solution-line" />
                 </article>
@@ -701,22 +716,21 @@ export default function Home() {
       <section id="technology" className="section technology-section">
         <div className="container tech-grid">
           <div>
-            <span className="section-kicker">04 / TECHNOLOGY</span>
+            <span className="section-kicker" style={{ color: '#a5b4fc', fontWeight: 700 }}>04 / TECHNOLOGY</span>
 
-            <h2>
+            <h2 style={{ fontSize: '2.5rem' }}>
               Modern architecture. <em>Practical engineering.</em>
             </h2>
 
-            <p>
-              We think beyond screens. Our products are shaped around secure
-              architecture, reusable systems, clear interfaces, connected data
-              and the ability to evolve.
+            <p style={{ fontSize: '1.15rem', color: '#e2e8f0', lineHeight: '1.6' }}>
+              We think beyond screens. Our products are shaped around secure architecture, reusable systems, clear interfaces, and connected data.
             </p>
 
             <button
               type="button"
               className="outline-btn"
               onClick={() => scrollTo('contact')}
+              style={{ fontSize: '1rem' }}
             >
               Start a conversation
               <ArrowRight size={16} />
@@ -769,13 +783,12 @@ export default function Home() {
           <div>
             <span className="section-kicker">LET&apos;S BUILD</span>
 
-            <h2>
+            <h2 style={{ fontSize: '2.5rem' }}>
               Have a challenge worth <em>solving?</em>
             </h2>
 
-            <p>
-              Tell us what you&apos;re building, changing or trying to improve.
-              Let&apos;s turn the idea into something useful.
+            <p style={{ fontSize: '1.15rem' }}>
+              Tell us what you&apos;re building, changing, or trying to improve. Let&apos;s turn the idea into something useful.
             </p>
           </div>
 
@@ -790,239 +803,213 @@ export default function Home() {
         </div>
       </section>
 
-      
-      {/* TEAM */}
+      {/* TEAM SECTION */}
       <section id="team" className="section team-section">
         <div className="container">
           <div className="section-intro centered team-heading">
-            <span className="section-kicker">05 / OUR TEAM</span>
+            <span className="section-kicker" style={{ color: '#4f46e5', fontWeight: 700, fontSize: '0.85rem' }}>05 / OUR TEAM</span>
 
-            <h2>
+            <h2 style={{ color: '#020617', fontSize: '2.5rem' }}>
               Meet the people behind <em>SkillForge.</em>
             </h2>
 
-            <p>
-              A growing team focused on building meaningful products,
-              supporting our customers and helping organisations get more
-              value from technology.
+            <p style={{ color: '#0f172a', fontSize: '1.15rem' }}>
+              Click any profile below to view details about our leadership and team members.
             </p>
           </div>
 
-          {/* FOUNDER */}
-          <div className="team-profile founder-profile">
-            <div className="team-photo-wrap">
-              <div className="team-photo-frame">
-                <Image
-                  src="/mypix.jpeg"
-                  alt="Engr. Martin Agoha"
-                  width={620}
-                  height={760}
-                  className="team-photo"
-                />
-              </div>
-
-              <div className="team-photo-label">
-                <span>SKILLFORGE / 01</span>
-                <strong>Founder &amp; Technology Lead</strong>
-              </div>
-            </div>
-
-            <div className="team-bio">
-              <span className="team-role">ENGR. MARTIN AGOHA</span>
-
-              <h3>
-                Building technology with
-                <em> purpose.</em>
-              </h3>
-
-              <p>
-                Engr. Martin Agoha is the driving force behind SkillForge
-                Technologies &amp; Solutions Ltd, with a focus on technology,
-                product development and practical digital solutions.
-              </p>
-
-              <p>
-                Through SkillForge, he is building products that bring
-                technology closer to everyday organisations and the people
-                they serve. His flagship initiative is <strong>CoreOne</strong>,
-                a connected education technology platform designed to simplify
-                school operations, learning, communication and digital
-                experiences.
-              </p>
-
-              <p>
-                His approach combines engineering, product thinking and a
-                commitment to building systems that are clear, useful,
-                scalable and designed around real-world needs.
-              </p>
-
-              <div className="team-highlights">
-                <div>
-                  <span>01</span>
-                  <strong>Product Development</strong>
-                  <p>Turning ideas into practical digital products.</p>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+            gap: '1.5rem',
+            maxWidth: '920px',
+            margin: '0 auto',
+            paddingTop: '1rem',
+          }}>
+            {teamMembers.map((member) => (
+              <button
+                key={member.id}
+                type="button"
+                onClick={() => setSelectedMember(member)}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  textAlign: 'center',
+                  background: '#ffffff',
+                  border: '1px solid #cbd5e1',
+                  borderRadius: '12px',
+                  padding: '1.25rem 0.75rem',
+                  cursor: 'pointer',
+                  transition: 'transform 0.2s ease, border-color 0.2s ease',
+                }}
+              >
+                <div style={{
+                  position: 'relative',
+                  width: '76px',
+                  height: '76px',
+                  borderRadius: '50%',
+                  overflow: 'hidden',
+                  border: '2px solid #4f46e5',
+                  marginBottom: '0.75rem',
+                }}>
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    style={{ objectFit: 'cover' }}
+                  />
                 </div>
-
-                <div>
-                  <span>02</span>
-                  <strong>Technology</strong>
-                  <p>Designing modern systems built for growth.</p>
-                </div>
-
-                <div>
-                  <span>03</span>
-                  <strong>Innovation</strong>
-                  <p>Using technology to solve meaningful problems.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* SALES & SUPPORT TEAM */}
-          <div className="team-members-grid">
-
-            <article className="team-member-card">
-              <div className="team-member-image">
-                <Image
-                  src="/Eli.png"
-                  alt="Mr Etim Elijah Ime"
-                  width={500}
-                  height={600}
-                  className="team-member-photo"
-                />
-              </div>
-
-              <div className="team-member-content">
-                <span className="team-member-number">02</span>
-                <span className="team-member-role">SALES MANAGER</span>
-
-                <h3>Mr Etim Elijah Ime</h3>
-
-                <p>
-                  Leads sales and business development, helping schools and
-                  organisations discover the value of SkillForge solutions and
-                  CoreOne while building strong customer relationships.
-                </p>
-              </div>
-            </article>
-
-
-            <article className="team-member-card">
-              <div className="team-member-image">
-                <Image
-                  src="/victor.png"
-                  alt="Mr Victor"
-                  width={500}
-                  height={600}
-                  className="team-member-photo"
-                />
-              </div>
-
-              <div className="team-member-content">
-                <span className="team-member-number">03</span>
-                <span className="team-member-role">
-                  PRODUCT TECHNICAL SUPPORT / SALES
+                <strong style={{ color: '#020617', fontSize: '0.95rem', lineHeight: '1.3', fontWeight: 700 }}>{member.name}</strong>
+                <span style={{ color: '#0f172a', fontSize: '0.8rem', marginTop: '0.25rem', fontWeight: 600 }}>{member.role}</span>
+                <span style={{
+                  marginTop: '0.75rem',
+                  fontSize: '0.75rem',
+                  fontWeight: '700',
+                  color: '#4f46e5',
+                  background: '#eef2ff',
+                  padding: '0.25rem 0.6rem',
+                  borderRadius: '999px',
+                }}>
+                  View details
                 </span>
-
-                <h3>Mr Victor</h3>
-
-                <p>
-                  Supports customers with product-related technical needs while
-                  helping prospective users understand CoreOne, its features
-                  and how it can fit their operational requirements.
-                </p>
-              </div>
-            </article>
-
-
-            <article className="team-member-card">
-              <div className="team-member-image">
-                <Image
-                  src="/ejike.jpeg"
-                  alt="Mr Ejike"
-                  width={500}
-                  height={600}
-                  className="team-member-photo"
-                />
-              </div>
-
-              <div className="team-member-content">
-                <span className="team-member-number">03</span>
-                <span className="team-member-role">
-                  PRODUCT TECHNICAL SUPPORT / SALES
-                </span>
-
-                <h3>Mr Ejike</h3>
-
-                <p>
-                  Supports customers with product-related technical needs while
-                  helping prospective users understand CoreOne, its features
-                  and how it can fit their operational requirements.
-                </p>
-              </div>
-            </article>
-
-            <article className="team-member-card">
-              <div className="team-member-image">
-                <Image
-                  src="/favour.png"
-                  alt="Mr Favour Ekezie"
-                  width={500}
-                  height={600}
-                  className="team-member-photo"
-                />
-              </div>
-
-              <div className="team-member-content">
-                <span className="team-member-number">04</span>
-                <span className="team-member-role">
-                  PRODUCT TECHNICAL SUPPORT / SALES
-                </span>
-
-                <h3>Mr Favour Ekezie</h3>
-
-                <p>
-                  Combines technical product support with customer engagement,
-                  helping users adopt CoreOne effectively while supporting
-                  product demonstrations and sales conversations.
-                </p>
-              </div>
-            </article>
-
-          </div>
-
-          <div className="team-bottom-note">
-            <span>SKILLFORGE / TEAM</span>
-            <p>
-              Technology, product, support and business development working
-              together to move great ideas forward.
-            </p>
+              </button>
+            ))}
           </div>
         </div>
       </section>
 
+      {/* TEAM DETAILS MODAL */}
+      {selectedMember && (
+        <div
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 1000,
+            backgroundColor: 'rgba(2, 6, 23, 0.8)',
+            backdropFilter: 'blur(4px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '1rem',
+          }}
+          onClick={() => setSelectedMember(null)}
+        >
+          <div
+            style={{
+              position: 'relative',
+              width: '100%',
+              maxWidth: '600px',
+              backgroundColor: '#ffffff',
+              borderRadius: '16px',
+              boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
+              overflow: 'hidden',
+              maxHeight: '90vh',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              padding: '1.25rem 1.5rem',
+              borderBottom: '1px solid #cbd5e1',
+              backgroundColor: '#f8fafc',
+            }}>
+              <div>
+                <span style={{ color: '#4f46e5', fontSize: '0.8rem', fontWeight: 800 }}>SKILLFORGE / {selectedMember.number}</span>
+                <h3 style={{ margin: 0, fontSize: '1.35rem', color: '#020617', fontWeight: 800 }}>{selectedMember.name}</h3>
+                <small style={{ color: '#0f172a', fontWeight: 700, fontSize: '0.85rem' }}>{selectedMember.role}</small>
+              </div>
 
-<section id="contact" className="section contact-section">
+              <button
+                type="button"
+                onClick={() => setSelectedMember(null)}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                  color: '#020617',
+                  padding: '0.5rem',
+                }}
+              >
+                <X size={22} />
+              </button>
+            </div>
+
+            <div style={{ padding: '1.5rem', overflowY: 'auto' }}>
+              <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
+                <div style={{
+                  position: 'relative',
+                  width: '130px',
+                  height: '150px',
+                  borderRadius: '10px',
+                  overflow: 'hidden',
+                  flexShrink: 0,
+                }}>
+                  <Image
+                    src={selectedMember.image}
+                    alt={selectedMember.name}
+                    fill
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
+
+                <div style={{ flex: 1, minWidth: '240px' }}>
+                  {selectedMember.bio.map((para, idx) => (
+                    <p key={idx} style={{ color: '#0f172a', fontSize: '1rem', lineHeight: '1.65', marginTop: idx === 0 ? 0 : '0.85rem' }}>
+                      {para}
+                    </p>
+                  ))}
+                </div>
+              </div>
+
+              {selectedMember.highlights && (
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+                  gap: '0.85rem',
+                  marginTop: '1.5rem',
+                  paddingTop: '1.25rem',
+                  borderTop: '1px solid #cbd5e1',
+                }}>
+                  {selectedMember.highlights.map((h) => (
+                    <div key={h.number} style={{ background: '#f8fafc', padding: '0.85rem', borderRadius: '8px', border: '1px solid #cbd5e1' }}>
+                      <span style={{ color: '#4f46e5', fontSize: '0.8rem', fontWeight: 800 }}>{h.number}</span>
+                      <strong style={{ display: 'block', color: '#020617', fontSize: '0.9rem', margin: '0.2rem 0', fontWeight: 700 }}>{h.title}</strong>
+                      <p style={{ color: '#0f172a', fontSize: '0.8rem', margin: 0 }}>{h.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* CONTACT SECTION */}
+      <section id="contact" className="section contact-section">
         <div className="container contact-grid">
           <div>
-            <span className="section-kicker">06 / CONTACT</span>
+            <span className="section-kicker" style={{ color: '#4f46e5', fontWeight: 700, fontSize: '0.85rem' }}>06 / CONTACT</span>
 
-            <h2>
+            <h2 style={{ color: '#020617', fontSize: '2.5rem' }}>
               Let&apos;s make <em>something meaningful.</em>
             </h2>
 
-            <p>
-              For CoreOne enquiries, partnerships, product support or
-              technology projects, SkillForge is ready to hear from you.
+            <p style={{ color: '#0f172a', fontSize: '1.15rem' }}>
+              For CoreOne enquiries, partnerships, product support, or technology projects, SkillForge is ready to hear from you.
             </p>
 
             <div className="contact-links">
-              <a href="tel:08035269983">
-                <span>01</span>
+              <a href="tel:08035269983" style={{ background: '#ffffff', borderColor: '#cbd5e1' }}>
+                <span style={{ color: '#4f46e5', fontWeight: 800 }}>01</span>
 
                 <div>
-                  <small>Calls</small>
-                  <strong>08035269983</strong>
+                  <small style={{ color: '#0f172a', fontWeight: 700, fontSize: '0.85rem' }}>Calls</small>
+                  <strong style={{ color: '#020617', fontSize: '1.1rem' }}>08035269983</strong>
                 </div>
 
                 <ArrowRight />
@@ -1032,23 +1019,24 @@ export default function Home() {
                 href="https://wa.me/2349045531092"
                 target="_blank"
                 rel="noopener noreferrer"
+                style={{ background: '#ffffff', borderColor: '#cbd5e1' }}
               >
-                <span>02</span>
+                <span style={{ color: '#4f46e5', fontWeight: 800 }}>02</span>
 
                 <div>
-                  <small>WhatsApp</small>
-                  <strong>09045531092</strong>
+                  <small style={{ color: '#0f172a', fontWeight: 700, fontSize: '0.85rem' }}>WhatsApp</small>
+                  <strong style={{ color: '#020617', fontSize: '1.1rem' }}>09045531092</strong>
                 </div>
 
                 <ArrowRight />
               </a>
 
-              <a href="mailto:skillforge82@gmail.com">
-                <span>03</span>
+              <a href="mailto:skillforge82@gmail.com" style={{ background: '#ffffff', borderColor: '#cbd5e1' }}>
+                <span style={{ color: '#4f46e5', fontWeight: 800 }}>03</span>
 
                 <div>
-                  <small>Email</small>
-                  <strong>skillforge82@gmail.com</strong>
+                  <small style={{ color: '#0f172a', fontWeight: 700, fontSize: '0.85rem' }}>Email</small>
+                  <strong style={{ color: '#020617', fontSize: '1.1rem' }}>skillforge82@gmail.com</strong>
                 </div>
 
                 <ArrowRight />
@@ -1059,9 +1047,10 @@ export default function Home() {
           <form
             className="contact-form"
             onSubmit={handleFormSubmit}
+            style={{ background: '#ffffff', borderColor: '#cbd5e1' }}
           >
-            <div className="form-title">
-              <MessageCircle size={19} />
+            <div className="form-title" style={{ color: '#020617', fontSize: '1.2rem', fontWeight: 700 }}>
+              <MessageCircle size={20} />
               <span>Send an enquiry</span>
             </div>
 
@@ -1071,11 +1060,10 @@ export default function Home() {
                   <ShieldCheck size={20} />
                 </div>
 
-                <h3>Thank you. Your enquiry has been received.</h3>
+                <h3 style={{ color: '#020617', fontSize: '1.2rem' }}>Thank you. Your enquiry has been received.</h3>
 
-                <p>
-                  Our team will review your message and get back to you as soon
-                  as possible.
+                <p style={{ color: '#0f172a', fontSize: '1rem' }}>
+                  Our team will review your message and get back to you as soon as possible.
                 </p>
               </div>
             ) : (
@@ -1086,7 +1074,7 @@ export default function Home() {
                   value="New SkillForge Website Enquiry"
                 />
 
-                <label>
+                <label style={{ color: '#020617', fontWeight: 700, fontSize: '0.95rem' }}>
                   Name
                   <input
                     name="name"
@@ -1094,10 +1082,11 @@ export default function Home() {
                     placeholder="Your full name"
                     autoComplete="name"
                     required
+                    style={{ color: '#020617', borderColor: '#94a3b8', fontSize: '1rem' }}
                   />
                 </label>
 
-                <label>
+                <label style={{ color: '#020617', fontWeight: 700, fontSize: '0.95rem' }}>
                   Email
                   <input
                     name="email"
@@ -1105,54 +1094,49 @@ export default function Home() {
                     placeholder="you@company.com"
                     autoComplete="email"
                     required
+                    style={{ color: '#020617', borderColor: '#94a3b8', fontSize: '1rem' }}
                   />
                 </label>
 
-                <label>
+                <label style={{ color: '#020617', fontWeight: 700, fontSize: '0.95rem' }}>
                   Phone
                   <input
                     name="phone"
                     type="tel"
                     placeholder="08035269983"
                     autoComplete="tel"
+                    style={{ color: '#020617', borderColor: '#94a3b8', fontSize: '1rem' }}
                   />
                 </label>
 
-                <label>
+                <label style={{ color: '#020617', fontWeight: 700, fontSize: '0.95rem' }}>
                   What can we help with?
-                  <select name="area" defaultValue="" required>
+                  <select name="area" defaultValue="" required style={{ color: '#020617', borderColor: '#94a3b8', fontSize: '1rem' }}>
                     <option value="" disabled>
                       Select an area
                     </option>
-
                     <option value="CoreOne">CoreOne</option>
-                    <option value="Technology solutions">
-                      Technology solutions
-                    </option>
-                    <option value="Partnership">
-                      Partnership
-                    </option>
-                    <option value="Product support">
-                      Product support
-                    </option>
+                    <option value="Technology solutions">Technology solutions</option>
+                    <option value="Partnership">Partnership</option>
+                    <option value="Product support">Product support</option>
                     <option value="Other">Other</option>
                   </select>
                 </label>
 
-                <label>
+                <label style={{ color: '#020617', fontWeight: 700, fontSize: '0.95rem' }}>
                   Message
                   <textarea
                     name="message"
                     rows={5}
                     placeholder="Tell us a little about what you need..."
                     required
+                    style={{ color: '#020617', borderColor: '#94a3b8', fontSize: '1rem' }}
                   />
                 </label>
 
                 {formState.errors && (
-                  <p className="form-error">
-                    Something went wrong while sending your enquiry. Please
-                    try again.
+                  <p className="form-error" style={{ color: '#dc2626', fontWeight: 600 }}>
+                    Something went wrong while sending your enquiry. Please try again.
                   </p>
                 )}
 
@@ -1160,6 +1144,7 @@ export default function Home() {
                   className="primary-btn"
                   type="submit"
                   disabled={formState.submitting}
+                  style={{ fontSize: '1rem' }}
                 >
                   {formState.submitting
                     ? 'Sending enquiry...'
@@ -1168,7 +1153,7 @@ export default function Home() {
                   <ArrowRight size={16} />
                 </button>
 
-                <p className="form-note">
+                <p className="form-note" style={{ color: '#0f172a', fontWeight: 500 }}>
                   Your enquiry will be securely submitted through Formspree.
                 </p>
               </>
@@ -1190,37 +1175,23 @@ export default function Home() {
             </span>
 
             <div>
-              <strong>SKILLFORGE</strong>
-              <small>Technologies &amp; Solutions Ltd</small>
+              <strong style={{ color: '#ffffff', fontSize: '1.1rem' }}>SKILLFORGE</strong>
+              <small style={{ color: '#cbd5e1', fontSize: '0.85rem' }}>Technologies &amp; Solutions Ltd</small>
             </div>
           </div>
 
-          <div className="footer-links">
-            <button type="button" onClick={() => scrollTo('company')}>
-              Company
-            </button>
-
-            <button type="button" onClick={() => scrollTo('coreone')}>
-              CoreOne
-            </button>
-
-            <button type="button" onClick={() => scrollTo('solutions')}>
-              Solutions
-            </button>
-
-            <button type="button" onClick={() => scrollTo('team')}>
-              Team
-            </button>
-
-            <button type="button" onClick={() => scrollTo('contact')}>
-              Contact
-            </button>
+          <div className="footer-links" style={{ fontSize: '0.95rem' }}>
+            <button type="button" onClick={() => scrollTo('company')}>Company</button>
+            <button type="button" onClick={() => scrollTo('coreone')}>CoreOne</button>
+            <button type="button" onClick={() => scrollTo('solutions')}>Solutions</button>
+            <button type="button" onClick={() => scrollTo('team')}>Team</button>
+            <button type="button" onClick={() => scrollTo('contact')}>Contact</button>
           </div>
 
           <div className="contact-details">
             <a className="contact-detail" href="tel:08035269983">
-              <span>Calls</span>
-              <strong>08035269983</strong>
+              <span style={{ color: '#cbd5e1' }}>Calls</span>
+              <strong style={{ color: '#ffffff', fontSize: '1rem' }}>08035269983</strong>
             </a>
 
             <a
@@ -1229,16 +1200,13 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <span>WhatsApp</span>
-              <strong>09045531092</strong>
+              <span style={{ color: '#cbd5e1' }}>WhatsApp</span>
+              <strong style={{ color: '#ffffff', fontSize: '1rem' }}>09045531092</strong>
             </a>
 
-            <a
-              className="contact-detail"
-              href="mailto:skillforge82@gmail.com"
-            >
-              <span>Email</span>
-              <strong>skillforge82@gmail.com</strong>
+            <a className="contact-detail" href="mailto:skillforge82@gmail.com">
+              <span style={{ color: '#cbd5e1' }}>Email</span>
+              <strong style={{ color: '#ffffff', fontSize: '1rem' }}>skillforge82@gmail.com</strong>
             </a>
           </div>
 
@@ -1246,15 +1214,15 @@ export default function Home() {
             type="button"
             className="back-top"
             onClick={() => scrollTo('home')}
+            style={{ fontSize: '0.9rem' }}
           >
             Back to top ↑
           </button>
         </div>
 
-        <div className="container footer-bottom">
+        <div className="container footer-bottom" style={{ fontSize: '0.85rem', color: '#cbd5e1' }}>
           <span>
-            © 2026 SkillForge Technologies &amp; Solutions Ltd. All rights
-            reserved.
+            © 2026 SkillForge Technologies &amp; Solutions Ltd. All rights reserved.
           </span>
 
           <span>Building what moves tomorrow.</span>
