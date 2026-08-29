@@ -131,6 +131,19 @@ const subTeamMembers: TeamMember[] = [
       'Leads sales and business development, helping schools and organizations discover the value of SkillForge solutions and CoreOne while building strong customer relationships.',
     ],
   },
+
+   {
+    id: 'joshua',
+    name: 'Joshua Okpechi',
+    role: 'Sales Manager',
+    image: '/joshua.png',
+    number: '02',
+    bio: [
+      'Leads sales and business development, helping schools and organizations discover the value of SkillForge solutions and CoreOne while building strong customer relationships.',
+    ],
+  },
+  
+
   {
     id: 'victor',
     name: 'Mr Victor',
@@ -151,6 +164,7 @@ const subTeamMembers: TeamMember[] = [
       'Supports customers with product-related technical needs while helping prospective users understand CoreOne, its features, and operational setup.',
     ],
   },
+
   {
     id: 'favour',
     name: 'Mr Favour Ekezie',
