@@ -688,10 +688,20 @@ export default function Home() {
         </div>
       </section>
 
+            
       <section id="solutions" className="section solutions-section">
         <div className="container">
           <div className="section-intro centered">
-            <span className="section-kicker" style={{ color: '#4f46e5', fontWeight: 700, fontSize: '0.85rem' }}>03 / WHAT WE DO</span>
+            <span
+              className="section-kicker"
+              style={{
+                color: '#4f46e5',
+                fontWeight: 700,
+                fontSize: '0.85rem',
+              }}
+            >
+              03 / WHAT WE DO
+            </span>
 
             <h2 style={{ color: '#020617', fontSize: '2.5rem' }}>
               Solutions built around <em>real operations.</em>
@@ -707,26 +717,90 @@ export default function Home() {
               const SolutionIcon = solution.icon;
 
               return (
-                <article className="solution-card" key={solution.title} style={{ background: '#ffffff', borderColor: '#cbd5e1' }}>
-                  <div className="solution-index" style={{ color: '#64748b', fontWeight: 700 }}>
+                <article
+                  className="solution-card"
+                  key={solution.title}
+                  style={{
+                    background: '#ffffff',
+                    borderColor: '#cbd5e1',
+                  }}
+                >
+                  <div
+                    className="solution-index"
+                    style={{
+                      color: '#64748b',
+                      fontWeight: 700,
+                    }}
+                  >
                     0{index + 1}
                   </div>
 
-                  <div className="solution-icon" style={{ color: '#4f46e5' }}>
+                  <div
+                    className="solution-icon"
+                    style={{ color: '#4f46e5' }}
+                  >
                     <SolutionIcon size={32} />
                   </div>
 
-                  <h3 style={{ color: '#020617', fontSize: '1.35rem' }}>{solution.title}</h3>
+                  <h3
+                    style={{
+                      color: '#020617',
+                      fontSize: '1.35rem',
+                    }}
+                  >
+                    {solution.title}
+                  </h3>
 
-                  <p style={{ color: '#0f172a', fontSize: '1.05rem', lineHeight: '1.6' }}>{solution.text}</p>
+                  <p
+                    style={{
+                      color: '#0f172a',
+                      fontSize: '1.05rem',
+                      lineHeight: '1.6',
+                    }}
+                  >
+                    {solution.text}
+                  </p>
 
                   <div className="solution-line" />
                 </article>
               );
             })}
           </div>
+
+          {/* Product Solutions CTA */}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginTop: '3rem',
+            }}
+          >
+            <a
+              href="https://skillforgetech-theta.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '0.9rem 1.6rem',
+                background: '#4f46e5',
+                color: '#ffffff',
+                borderRadius: '10px',
+                fontWeight: 700,
+                fontSize: '1rem',
+                textDecoration: 'none',
+                transition: 'all 0.2s ease',
+                boxShadow: '0 8px 20px rgba(79, 70, 229, 0.18)',
+              }}
+            >
+              Click to Visit Our Product Solutions
+            </a>
+          </div>
         </div>
       </section>
+
+
 
       <section id="technology" className="section technology-section">
         <div className="container tech-grid">
