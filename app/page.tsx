@@ -689,78 +689,68 @@ export default function Home() {
       </section>
 
           
-    <section id="solutions" className="section solutions-section">
-      <div className="container">
-        <div className="section-intro centered">
-          <span className="section-kicker" style={{ color: '#4f46e5', fontWeight: 700, fontSize: '0.85rem' }}>
-            03 / WHAT WE DO
-          </span>
+      <section id="solutions" className="section solutions-section">
+        <div className="container">
+          <div className="section-intro centered">
+            <span className="section-kicker" style={{ color: '#4f46e5', fontWeight: 700, fontSize: '0.85rem' }}>03 / WHAT WE DO</span>
 
-          <h2 style={{ color: '#020617', fontSize: '2.5rem' }}>
-            Solutions built around <em>real operations.</em>
-          </h2>
+            <h2 style={{ color: '#020617', fontSize: '2.5rem' }}>
+              Solutions built around <em>real operations.</em>
+            </h2>
 
-          <p style={{ color: '#0f172a', fontSize: '1.15rem' }}>
-            We focus on practical systems that create clarity, speed, and better experiences.
-          </p>
+            <p style={{ color: '#0f172a', fontSize: '1.15rem' }}>
+              We focus on practical systems that create clarity, speed, and better experiences.
+            </p>
+          </div>
+
+          <div className="solution-grid">
+            {solutions.map((solution, index) => {
+              const SolutionIcon = solution.icon;
+
+              return (
+                <article className="solution-card" key={solution.title} style={{ background: '#ffffff', borderColor: '#cbd5e1' }}>
+                  <div className="solution-index" style={{ color: '#64748b', fontWeight: 700 }}>
+                    0{index + 1}
+                  </div>
+
+                  <div className="solution-icon" style={{ color: '#4f46e5' }}>
+                    <SolutionIcon size={32} />
+                  </div>
+
+                  <h3 style={{ color: '#020617', fontSize: '1.35rem' }}>{solution.title}</h3>
+
+                  <p style={{ color: '#0f172a', fontSize: '1.05rem', lineHeight: '1.6' }}>{solution.text}</p>
+
+                  <div className="solution-line" />
+                </article>
+              );
+            })}
+          </div>
+
+          <div style={{ textAlign: 'center', marginTop: '40px' }}>
+            <a
+              href="https://nexa-soft-martinez-solutions.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-block',
+                padding: '14px 28px',
+                backgroundColor: '#d9f99d',
+                color: '#17200b',
+                border: '1px solid #bef264',
+                borderRadius: '8px',
+                fontWeight: 700,
+                fontSize: '16px',
+                textDecoration: 'none',
+                cursor: 'pointer',
+              }}
+            >
+              Visit Our Product Solutions →
+            </a>
+          </div>
         </div>
+      </section>
 
-        <div className="solution-grid">
-          {solutions.map((solution, index) => {
-            const SolutionIcon = solution.icon;
-
-            return (
-              <article
-                className="solution-card"
-                key={solution.title}
-                style={{ background: '#ffffff', borderColor: '#cbd5e1' }}
-              >
-                <div className="solution-index" style={{ color: '#64748b', fontWeight: 700 }}>
-                  0{index + 1}
-                </div>
-
-                <div className="solution-icon" style={{ color: '#4f46e5' }}>
-                  <SolutionIcon size={32} />
-                </div>
-
-                <h3 style={{ color: '#020617', fontSize: '1.35rem' }}>
-                  {solution.title}
-                </h3>
-
-                <p style={{ color: '#0f172a', fontSize: '1.05rem', lineHeight: '1.6' }}>
-                  {solution.text}
-                </p>
-
-                <div className="solution-line" />
-              </article>
-            );
-          })}
-        </div>
-
-        {/* CLICK TO VISIT PRODUCT SOLUTIONS */}
-        <div style={{ textAlign: 'center', marginTop: '40px' }}>
-          <a
-            href="https://skillforgetech-theta.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: 'inline-block',
-              padding: '14px 28px',
-              backgroundColor: '#d9f99d',
-              color: '#17200b',
-              border: '1px solid #bef264',
-              borderRadius: '8px',
-              fontWeight: 700,
-              fontSize: '16px',
-              textDecoration: 'none',
-              cursor: 'pointer',
-            }}
-          >
-            Visit Our Product Solutions →
-          </a>
-        </div>
-      </div>
-    </section>
 
 
 
