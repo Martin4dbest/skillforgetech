@@ -3,45 +3,31 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { useForm } from '@formspree/react';
-import type { LucideIcon } from 'lucide-react';
 import {
   ArrowRight,
   BarChart3,
   BookOpen,
-  Cloud,
-  Code2,
-  Cpu,
+  CalendarCheck,
+  CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
   GraduationCap,
   Layers3,
   Menu,
   MessageCircle,
   MonitorSmartphone,
-  MoveUpRight,
-  Network,
-  Play,
   ShieldCheck,
-  Sparkles,
   UsersRound,
   X,
   Zap,
 } from 'lucide-react';
 
-type Solution = {
-  icon: LucideIcon;
+type GalleryItem = {
   title: string;
-  text: string;
-};
-
-type CoreOneFeature = {
-  title: string;
-  text: string;
-  icon: LucideIcon;
-};
-
-type Stat = {
-  num: string;
-  label: string;
-  value: string;
+  role: 'Admin' | 'Teacher' | 'Student' | 'Staff' | 'Parent';
+  category: string;
+  description: string;
+  image: string;
 };
 
 type TeamMember = {
@@ -49,140 +35,222 @@ type TeamMember = {
   name: string;
   role: string;
   image: string;
-  number: string;
-  bio: string[];
-  highlights?: { number: string; title: string; desc: string }[];
+  bio: string;
 };
 
-const solutions: Solution[] = [
+const galleryItems: GalleryItem[] = [
+  // ADMIN
   {
-    icon: GraduationCap,
-    title: 'EdTech Solutions',
-    text: 'Digital infrastructure bringing school operations, learning, and communication into one unified platform.',
+    title: 'Admin Dashboard',
+    role: 'Admin',
+    category: 'Administration',
+    description: 'A complete overview of school operations, activities and key performance information.',
+    image: '/screens/admin/admin-dashboard.png',
   },
   {
-    icon: Code2,
-    title: 'Software & Product Engineering',
-    text: 'Purpose-built web and mobile products engineered for real workflows and measurable outcomes.',
+    title: 'Student Management',
+    role: 'Admin',
+    category: 'Students',
+    description: 'Manage student records, profiles and school information from one workspace.',
+    image: '/screens/admin/admin-students.png',
   },
   {
-    icon: Network,
-    title: 'Digital Transformation',
-    text: 'Modernize manual processes with connected systems, automation, and practical technology strategy.',
+    title: 'Teacher Management',
+    role: 'Admin',
+    category: 'Teachers',
+    description: 'Manage teachers, staff assignments and academic responsibilities.',
+    image: '/screens/admin/admin-teachers.png',
+  },
+  {
+    title: 'Attendance Management',
+    role: 'Admin',
+    category: 'Attendance',
+    description: 'Monitor attendance and maintain clear visibility across the school.',
+    image: '/screens/admin/admin-attendance.png',
+  },
+  {
+    title: 'Fees & Payments',
+    role: 'Admin',
+    category: 'Finance',
+    description: 'Track school fees, payments and financial records with better visibility.',
+    image: '/screens/admin/admin-fees.png',
+  },
+  {
+    title: 'Results & Academics',
+    role: 'Admin',
+    category: 'Academics',
+    description: 'Manage academic records, results and student performance.',
+    image: '/screens/admin/admin-results.png',
+  },
+  {
+    title: 'Books & Resources',
+    role: 'Admin',
+    category: 'Library',
+    description: 'Manage books and digital learning resources across the school.',
+    image: '/screens/admin/admin-books.png',
+  },
+  {
+    title: 'CBT & Assessment',
+    role: 'Admin',
+    category: 'CBT',
+    description: 'Manage computer-based tests and digital assessment activities.',
+    image: '/screens/admin/admin-cbt.png',
+  },
+  {
+    title: 'School Analytics',
+    role: 'Admin',
+    category: 'Analytics',
+    description: 'Turn school data into useful operational and performance insights.',
+    image: '/screens/admin/admin-analytics.png',
+  },
+  {
+    title: 'System Settings',
+    role: 'Admin',
+    category: 'Settings',
+    description: 'Configure school-wide settings and platform preferences.',
+    image: '/screens/admin/admin-settings.png',
+  },
+  {
+    title: 'Staff Management',
+    role: 'Admin',
+    category: 'Staff',
+    description: 'Manage staff records, responsibilities and workforce information.',
+    image: '/screens/admin/admin-staff.png',
+  },
+  {
+    title: 'School Profile',
+    role: 'Admin',
+    category: 'School Management',
+    description: 'Manage school identity, information and institutional settings.',
+    image: '/screens/admin/admin-school.png',
+  },
+  {
+    title: 'Performance Intelligence',
+    role: 'Admin',
+    category: 'Performance',
+    description: 'Monitor school and staff performance through meaningful insights.',
+    image: '/screens/admin/admin-performance.png',
+  },
+
+  // TEACHER
+  {
+    title: 'Teacher Dashboard',
+    role: 'Teacher',
+    category: 'Teacher Portal',
+    description: 'A focused workspace for teachers to manage everyday academic activities.',
+    image: '/screens/teacher/teacher-dashboard.png',
+  },
+  {
+    title: 'Teacher Mobile Experience',
+    role: 'Teacher',
+    category: 'Mobile App',
+    description: 'Access important teaching and school activities from a mobile device.',
+    image: '/screens/teacher/teacher-app.jpeg',
+  },
+
+  // STUDENT
+  {
+    title: 'Student Dashboard',
+    role: 'Student',
+    category: 'Student Portal',
+    description: 'A connected student experience for learning, results and school activities.',
+    image: '/screens/student/student-dashboard.jpeg',
+  },
+  {
+    title: 'Student Mobile Experience',
+    role: 'Student',
+    category: 'Mobile App',
+    description: 'A simple mobile experience for students to stay connected with school.',
+    image: '/screens/student/student-app.jpeg',
+  },
+
+  // STAFF
+  {
+    title: 'Staff Mobile App',
+    role: 'Staff',
+    category: 'Staff Portal',
+    description: 'Mobile tools for staff attendance, activities and everyday school operations.',
+    image: '/screens/staff/staff-app.jpeg',
+  },
+
+  // PARENT
+  {
+    title: 'Parent Dashboard',
+    role: 'Parent',
+    category: 'Parent Portal',
+    description: 'Stay connected to student progress, school information, fees and communication.',
+    image: '/screens/parent/parent-dashboard.jpeg',
   },
 ];
 
-const coreOneFeatures: CoreOneFeature[] = [
+const teamMembers: TeamMember[] = [
   {
-    title: 'School Administration',
-    text: 'A central workspace for day-to-day school operations and records.',
-    icon: Layers3,
+    id: 'martin',
+    name: 'Engr. Martin Agoha',
+    role: 'Founder & Technology Lead',
+    image: '/mypix.jpeg',
+    bio: 'Leads product strategy, technology and the development of practical digital solutions, including CoreOne.',
   },
   {
-    title: 'Student & Parent Portals',
-    text: 'One connected digital experience for students, families, and administrators.',
-    icon: UsersRound,
-  },
-  {
-    title: 'Learning & Assessment',
-    text: 'Attendance, CBT, gradebooks, results, and learning tools in one place.',
-    icon: BookOpen,
-  },
-  {
-    title: 'Security & Access',
-    text: 'Role-based access control built for multi-tenant educational institutions.',
-    icon: ShieldCheck,
-  },
-];
-
-const stats: Stat[] = [
-  { num: '01', label: 'Flagship Product', value: 'CoreOne' },
-  { num: '02', label: 'Experience Layers', value: 'Web + Mobile' },
-  { num: '03', label: 'Core Focus', value: 'People + Data' },
-  { num: '04', label: 'Built For', value: 'Scale' },
-];
-
-const executiveMember: TeamMember = {
-  id: 'martin',
-  name: 'Engr. Martin Agoha',
-  role: 'Founder & Technology Lead',
-  image: '/mypix.jpeg',
-  number: '01',
-  bio: [
-    'Engr. Martin Agoha is the driving force behind SkillForge Technologies & Solutions Ltd, with a focus on technology, product development, and practical digital solutions.',
-    'Through SkillForge, he builds products that bring technology closer to everyday organizations and the people they serve. His flagship initiative is CoreOne, a connected education technology platform designed to simplify school operations, learning, and communication.',
-    'His approach combines engineering, product thinking, and a commitment to building systems that are clear, useful, scalable, and designed around real-world needs.',
-  ],
-  highlights: [
-    { number: '01', title: 'Product Development', desc: 'Turning ideas into practical digital products.' },
-    { number: '02', title: 'Technology', desc: 'Designing modern systems built for growth.' },
-    { number: '03', title: 'Innovation', desc: 'Using technology to solve meaningful problems.' },
-  ],
-};
-
-const subTeamMembers: TeamMember[] = [
-  {
-    id: 'elime',
+    id: 'elijah',
     name: 'Mr Etim Elijah Ime',
     role: 'Sales Manager',
     image: '/Eli.png',
-    number: '02',
-    bio: [
-      'Leads sales and business development, helping schools and organizations discover the value of SkillForge solutions and CoreOne while building strong customer relationships.',
-    ],
+    bio: 'Supports business development, customer relationships and CoreOne demonstrations.',
   },
-
-   {
+  {
     id: 'joshua',
     name: 'Joshua Okpechi',
     role: 'Sales Manager',
     image: '/joshua.png',
-    number: '02',
-    bio: [
-      'Leads sales and business development, helping schools and organizations discover the value of SkillForge solutions and CoreOne while building strong customer relationships.',
-    ],
+    bio: 'Supports sales, business development and customer engagement.',
   },
-  
-
   {
     id: 'victor',
     name: 'Mr Victor',
     role: 'Product Technical Support / Sales',
     image: '/victor.png',
-    number: '03',
-    bio: [
-      'Supports customers with product-related technical needs while helping prospective users understand CoreOne, its features, and operational setup.',
-    ],
+    bio: 'Supports product adoption, technical enquiries and customer demonstrations.',
   },
   {
     id: 'ejike',
     name: 'Mr Ejike',
     role: 'Product Technical Support / Sales',
     image: '/ejike.jpeg',
-    number: '04',
-    bio: [
-      'Supports customers with product-related technical needs while helping prospective users understand CoreOne, its features, and operational setup.',
-    ],
+    bio: 'Supports customers with product setup, technical needs and CoreOne adoption.',
   },
-
   {
     id: 'favour',
     name: 'Mr Favour Ekezie',
     role: 'Product Technical Support / Sales',
     image: '/favour.png',
-    number: '05',
-    bio: [
-      'Combines technical product support with customer engagement, helping users adopt CoreOne effectively while supporting product demonstrations.',
-    ],
+    bio: 'Combines product support with customer engagement and demonstrations.',
   },
+];
+
+const bookingTypes = [
+  'School Owner / Proprietor',
+  'School Administrator',
+  'Teacher',
+  'Parent',
+  'Student',
+  'School Staff',
+  'Organization',
+  'Other',
 ];
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [selectedGallery, setSelectedGallery] = useState<number | null>(null);
+  const [galleryFilter, setGalleryFilter] = useState<'All' | GalleryItem['role']>('All');
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
+  const [students, setStudents] = useState(500);
 
   const formId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID || 'xrpggbar';
   const [formState, handleFormSubmit] = useForm(formId);
+
+  const pricePerStudent = 3500;
+  const totalPrice = students * pricePerStudent;
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({
@@ -192,11 +260,25 @@ export default function Home() {
     setMenuOpen(false);
   };
 
-  return (
-    <main className="site-shell" style={{ color: '#090d16', fontSize: '1.05rem', lineHeight: '1.6' }}>
-      <div className="ambient ambient-a" />
-      <div className="ambient ambient-b" />
+  const closeGallery = () => setSelectedGallery(null);
 
+  const previousGallery = () => {
+    setSelectedGallery((current) => {
+      if (current === null) return null;
+      return current === 0 ? galleryItems.length - 1 : current - 1;
+    });
+  };
+
+  const nextGallery = () => {
+    setSelectedGallery((current) => {
+      if (current === null) return null;
+      return current === galleryItems.length - 1 ? 0 : current + 1;
+    });
+  };
+
+  return (
+    <main className="site-shell">
+      {/* HEADER */}
       <header className="site-header">
         <div className="container nav-wrap">
           <button
@@ -207,1156 +289,895 @@ export default function Home() {
           >
             <span className="brand-logo">
               <Image
-                src="/logo.png"
-                alt="SkillForge Technologies & Solutions Ltd"
-                width={180}
-                height={58}
+                src="/coreone-logo.jpeg"
+                alt="CoreOne"
+                width={150}
+                height={48}
                 priority
               />
             </span>
 
             <span className="brand-copy">
-              <strong style={{ color: '#020617', fontSize: '1.15rem' }}>SKILLFORGE</strong>
-              <small style={{ color: '#0f172a', fontSize: '0.85rem', fontWeight: 600 }}>Technologies &amp; Solutions Ltd</small>
+              <strong>CORE1</strong>
+              <small>Enterprise Solution</small>
             </span>
           </button>
 
-          <nav
-            className={`main-nav ${menuOpen ? 'open' : ''}`}
-            aria-label="Main navigation"
-            style={{ color: '#020617', fontSize: '1rem', fontWeight: 600 }}
-          >
-            <button type="button" onClick={() => scrollTo('company')}>Company</button>
-            <button type="button" onClick={() => scrollTo('coreone')}>CoreOne</button>
-            <button type="button" onClick={() => scrollTo('solutions')}>Solutions</button>
-            <button type="button" onClick={() => scrollTo('technology')}>Technology</button>
-            <button type="button" onClick={() => scrollTo('team')}>Team</button>
-            <button type="button" onClick={() => scrollTo('contact')}>Contact</button>
+          <nav className={`main-nav ${menuOpen ? 'open' : ''}`}>
+            <button type="button" onClick={() => scrollTo('company')}>
+              Company
+            </button>
+            <button type="button" onClick={() => scrollTo('coreone')}>
+              CoreOne
+            </button>
+            <button type="button" onClick={() => scrollTo('showcase')}>
+              Product
+            </button>
+            <button type="button" onClick={() => scrollTo('pricing')}>
+              Pricing
+            </button>
+            <button type="button" onClick={() => scrollTo('contact')}>
+              Contact
+            </button>
           </nav>
 
           <button
             type="button"
             className="nav-cta"
-            onClick={() => scrollTo('contact')}
+            onClick={() => scrollTo('booking')}
           >
-            Talk to us
-            <ArrowRight size={16} />
+            Book a Demo
+            <ArrowRight size={15} />
           </button>
 
           <button
             type="button"
-            className="menu-toggle"
-            onClick={() => setMenuOpen((open) => !open)}
+            className="menu-button"
+            onClick={() => setMenuOpen((value) => !value)}
             aria-label="Toggle navigation"
-            aria-expanded={menuOpen}
           >
-            {menuOpen ? <X /> : <Menu />}
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </header>
 
-      <section id="home" className="hero">
-        <div className="container hero-grid">
+      {/* HERO */}
+      <section id="home" className="hero-section">
+        <div className="hero-grid" />
+
+        <div className="container hero-content">
           <div className="hero-copy">
-            <div className="eyebrow" style={{ color: '#020617', fontWeight: 700, fontSize: '0.95rem' }}>
-              <span className="pulse-dot" />
-              Technology. Products. Possibility.
+            <div className="eyebrow">
+              <span className="eyebrow-dot" />
+              Technology • Products • Solutions
             </div>
 
-            <h1 style={{ color: '#020617', fontSize: '3rem', lineHeight: '1.15', fontWeight: 800 }}>
-              We build digital products that <em>move people forward.</em>
+            <h1>
+              Technology that works
+              <span> for real businesses.</span>
             </h1>
 
-            <p style={{ color: '#0f172a', fontSize: '1.25rem', lineHeight: '1.7', fontWeight: 500 }}>
-              SkillForge Technologies &amp; Solutions Ltd is a product-driven company building modern software, digital platforms, and practical solutions for forward-thinking organizations.
+            <p className="hero-text">
+              Core1 Enterprise Solution builds practical digital products and
+              technology systems that make organizations easier to run, connect
+              and grow.
             </p>
 
             <div className="hero-actions">
               <button
                 type="button"
-                className="primary-btn"
-                onClick={() => scrollTo('coreone')}
+                className="button button-primary"
+                onClick={() => scrollTo('booking')}
               >
-                Explore CoreOne
+                Book a Demo
                 <ArrowRight size={17} />
               </button>
 
               <button
                 type="button"
-                className="ghost-btn"
-                onClick={() => scrollTo('company')}
-                style={{ color: '#020617', fontWeight: 700 }}
+                className="button button-secondary"
+                onClick={() => scrollTo('coreone')}
               >
-                <span className="play">
-                  <Play size={13} fill="currentColor" />
-                </span>
-                Discover SkillForge
+                Explore CoreOne
               </button>
             </div>
 
-            <div className="hero-proof">
-              <div>
-                <span style={{ color: '#020617', fontSize: '1.5rem', fontWeight: 800 }}>01</span>
-                <p style={{ color: '#0f172a', fontSize: '0.95rem', fontWeight: 600 }}>Company behind CoreOne</p>
-              </div>
-
-              <div>
-                <span style={{ color: '#020617', fontSize: '1.5rem', fontWeight: 800 }}>∞</span>
-                <p style={{ color: '#0f172a', fontSize: '0.95rem', fontWeight: 600 }}>Built to grow with you</p>
-              </div>
-
-              <div>
-                <span style={{ color: '#020617', fontSize: '1.5rem', fontWeight: 800 }}>24/7</span>
-                <p style={{ color: '#0f172a', fontSize: '0.95rem', fontWeight: 600 }}>Digital-first mindset</p>
-              </div>
+            <div className="hero-note">
+              <CheckCircle2 size={15} />
+              Built for practical operations and measurable outcomes
             </div>
           </div>
 
-          <div className="hero-stage">
-            <div className="stage-grid" />
-            <div className="orbit orbit-one" />
-            <div className="orbit orbit-two" />
+          <div className="hero-product-card">
+            <div className="product-card-top">
+              <div>
+                <span className="mini-label">FLAGSHIP PRODUCT</span>
+                <strong>CoreOne</strong>
+              </div>
+              <span className="live-badge">
+                <span />
+                Live
+              </span>
+            </div>
 
-            <div className="core-card">
-              <div className="core-card-top">
-                <span className="product-badge">
-                  <Sparkles size={13} />
-                  FLAGSHIP PRODUCT
-                </span>
-
-                <span className="status">LIVE ECOSYSTEM</span>
+            <div className="mock-dashboard">
+              <div className="mock-sidebar">
+                <div className="mock-logo">C1</div>
+                <span />
+                <span />
+                <span />
+                <span />
               </div>
 
-              <div className="core-logo">
-                C<span>O</span>RE<span className="mini-dot">•</span>ONE
-              </div>
-
-              <p style={{ fontSize: '1rem' }}>
-                The connected operating layer for modern schools.
-              </p>
-
-              <div className="dashboard-window">
-                <div className="window-bar">
-                  <span />
-                  <span />
-                  <span />
-                  <i>CoreOne Workspace</i>
+              <div className="mock-main">
+                <div className="mock-heading">
+                  <div>
+                    <small>School Overview</small>
+                    <strong>Good morning</strong>
+                  </div>
+                  <div className="mock-avatar" />
                 </div>
 
-                <div className="dash-body">
-                  <aside>
-                    <b />
-                    <span />
-                    <span />
-                    <span />
-                    <span />
-                    <span />
-                    <span />
-                  </aside>
+                <div className="mock-stats">
+                  <div>
+                    <small>Students</small>
+                    <strong>1,248</strong>
+                  </div>
+                  <div>
+                    <small>Attendance</small>
+                    <strong>94.8%</strong>
+                  </div>
+                  <div>
+                    <small>Teachers</small>
+                    <strong>76</strong>
+                  </div>
+                </div>
 
-                  <div className="dash-main">
-                    <div className="dash-heading">
-                      <span>School Overview</span>
-                      <small>2026 / 2027</small>
-                    </div>
-
-                    <div className="metric-row">
-                      <div />
-                      <div />
-                      <div />
-                    </div>
-
-                    <div className="chart-row">
-                      <div className="chart">
-                        <span />
-                        <i />
-                        <b />
-                        <em />
-                        <strong />
-                      </div>
-
-                      <div className="donut" />
-                    </div>
+                <div className="mock-chart">
+                  <div className="chart-line" />
+                  <div className="chart-bars">
+                    <i />
+                    <i />
+                    <i />
+                    <i />
+                    <i />
+                    <i />
+                    <i />
                   </div>
                 </div>
               </div>
-
-              <div className="floating-card card-users">
-                <UsersRound size={16} />
-
-                <div>
-                  <b>Students</b>
-                  <span>Connected</span>
-                </div>
-
-                <strong>↗</strong>
-              </div>
-
-              <div className="floating-card card-security">
-                <ShieldCheck size={16} />
-
-                <div>
-                  <b>Access</b>
-                  <span>Role-aware</span>
-                </div>
-
-                <strong>✓</strong>
-              </div>
             </div>
 
-            <div className="stage-note">
-              <Zap size={15} />
-              One platform. Many possibilities.
+            <div className="product-card-bottom">
+              <span>School Management</span>
+              <span>Web + Mobile</span>
+              <span>Analytics</span>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="ticker-section" aria-label="Our areas of focus">
-        <div className="ticker-track">
-          <span>PRODUCT DEVELOPMENT</span>
-          <i />
-
-          <span>EDTECH</span>
-          <i />
-
-          <span>DIGITAL TRANSFORMATION</span>
-          <i />
-
-          <span>SOFTWARE SOLUTIONS</span>
-          <i />
-
-          <span>PRODUCT TECHNICAL SUPPORT</span>
-          <i />
-        </div>
-      </section>
-
-      <section id="company" className="section company-section">
+      {/* COMPANY */}
+      <section id="company" className="section section-light">
         <div className="container">
-          <div className="section-intro split">
+          <div className="section-heading compact-heading">
+            <span className="section-number">01</span>
             <div>
-              <span className="section-kicker" style={{ color: '#4f46e5', fontWeight: 700, fontSize: '0.85rem' }}>01 / THE COMPANY</span>
-
-              <h2 style={{ color: '#020617', fontSize: '2.5rem', lineHeight: '1.2' }}>
-                Technology is only powerful when it{' '}
-                <em>solves something real.</em>
-              </h2>
+              <span className="section-kicker">CORE1 ENTERPRISE SOLUTION</span>
+              <h2>We build technology around real needs.</h2>
             </div>
-
-            <p style={{ color: '#0f172a', fontSize: '1.15rem', lineHeight: '1.65' }}>
-              We combine product thinking, engineering, and business understanding to build technology that is useful today and ready for tomorrow.
-            </p>
           </div>
 
           <div className="company-grid">
-            <article className="manifesto-card">
-              <div className="manifesto-number">SF / 01</div>
+            <p className="lead-copy">
+              We combine product thinking, engineering and business
+              understanding to create digital systems people can actually use.
+            </p>
 
-              <h3 style={{ fontSize: '1.75rem', lineHeight: '1.3' }}>
-                Built with purpose.
-                <br />
-                <em>Engineered for impact.</em>
-              </h3>
+            <div className="principles">
+              <div>
+                <span>01</span>
+                <strong>Product-led</strong>
+                <p>We focus on useful products, not unnecessary complexity.</p>
+              </div>
 
-              <p style={{ fontSize: '1.05rem', lineHeight: '1.6' }}>
-                SkillForge exists to design and deliver technology that improves how organizations work, how people interact with systems, and how decisions are made.
+              <div>
+                <span>02</span>
+                <strong>Practical</strong>
+                <p>Every solution starts with the problem it needs to solve.</p>
+              </div>
+
+              <div>
+                <span>03</span>
+                <strong>Built to scale</strong>
+                <p>Systems designed to grow with the organizations using them.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* COREONE */}
+      <section id="coreone" className="section coreone-section">
+        <div className="container">
+          <div className="section-heading">
+            <span className="section-number">02</span>
+            <div>
+              <span className="section-kicker">FLAGSHIP PRODUCT</span>
+              <h2>Meet CoreOne.</h2>
+              <p>
+                A connected school management ecosystem for modern
+                educational institutions.
+              </p>
+            </div>
+          </div>
+
+          <div className="coreone-layout">
+            <div className="coreone-info">
+              <div className="coreone-badge">
+                <span>CORE</span>ONE
+              </div>
+
+              <h3>One platform. The whole school.</h3>
+
+              <p>
+                CoreOne connects administration, academics, communication,
+                finance, attendance and learning in one digital environment.
               </p>
 
               <button
                 type="button"
-                className="text-link"
-                onClick={() => scrollTo('contact')}
-                style={{ fontSize: '1rem', fontWeight: 700 }}
+                className="text-button"
+                onClick={() => scrollTo('showcase')}
               >
-                Work with SkillForge
-                <MoveUpRight size={15} />
+                View product screens
+                <ArrowRight size={16} />
               </button>
-            </article>
+            </div>
 
-            <div className="principles">
-              <div className="principle">
-                <span style={{ color: '#4f46e5', fontSize: '1.25rem', fontWeight: 800 }}>01</span>
-
-                <div>
-                  <h4 style={{ color: '#020617', fontSize: '1.2rem', fontWeight: 700 }}>Product-led</h4>
-
-                  <p style={{ color: '#0f172a', fontSize: '1.05rem' }}>
-                    We build around outcomes and the user journey—not technology for technology&apos;s sake.
-                  </p>
-                </div>
+            <div className="feature-grid">
+              <div className="feature-card">
+                <Layers3 size={20} />
+                <strong>School Administration</strong>
+                <span>Manage everyday school operations centrally.</span>
               </div>
 
-              <div className="principle">
-                <span style={{ color: '#4f46e5', fontSize: '1.25rem', fontWeight: 800 }}>02</span>
-
-                <div>
-                  <h4 style={{ color: '#020617', fontSize: '1.2rem', fontWeight: 700 }}>Human-centred</h4>
-
-                  <p style={{ color: '#0f172a', fontSize: '1.05rem' }}>
-                    Interfaces should feel clear, systems understandable, and user experiences respectful.
-                  </p>
-                </div>
+              <div className="feature-card">
+                <UsersRound size={20} />
+                <strong>Parents & Students</strong>
+                <span>Keep families connected to school activities.</span>
               </div>
 
-              <div className="principle">
-                <span style={{ color: '#4f46e5', fontSize: '1.25rem', fontWeight: 800 }}>03</span>
+              <div className="feature-card">
+                <BookOpen size={20} />
+                <strong>Learning & Assessment</strong>
+                <span>Results, CBT, attendance and learning tools.</span>
+              </div>
 
-                <div>
-                  <h4 style={{ color: '#020617', fontSize: '1.2rem', fontWeight: 700 }}>Built to scale</h4>
-
-                  <p style={{ color: '#0f172a', fontSize: '1.05rem' }}>
-                    Architected so products grow seamlessly alongside the organizations they serve.
-                  </p>
-                </div>
+              <div className="feature-card">
+                <ShieldCheck size={20} />
+                <strong>Security & Access</strong>
+                <span>Role-based access across the platform.</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="coreone" className="section coreone-section">
+      {/* SHOWCASE */}
+      <section id="showcase" className="section section-light">
         <div className="container">
-          <div className="coreone-head">
+          <div className="section-heading showcase-heading">
+            <span className="section-number">03</span>
             <div>
-              <span className="section-kicker" style={{ color: '#4f46e5', fontWeight: 700, fontSize: '0.85rem' }}>02 / FLAGSHIP PRODUCT</span>
-
-              <div className="coreone-wordmark" style={{ color: '#020617', fontSize: '3rem', fontWeight: 900 }}>
-                CORE<span>ONE</span>
-              </div>
-            </div>
-
-            <div>
-              <span className="live-pill">
-                <span />
-                In active development
-              </span>
-
-              <p style={{ color: '#0f172a', fontSize: '1.15rem', lineHeight: '1.6' }}>
-                CoreOne is SkillForge&apos;s flagship EdTech platform—connecting school administration, learning, communication, and analytics in one modern ecosystem.
+              <span className="section-kicker">PRODUCT SHOWCASE</span>
+              <h2>See CoreOne in action.</h2>
+              <p>
+                Explore the platform across dashboards, mobile apps and
+                everyday school workflows.
               </p>
             </div>
           </div>
 
-          <div className="coreone-showcase">
-            <div className="showcase-copy">
-              <span className="mini-label" style={{ color: '#020617', fontWeight: 700, fontSize: '0.85rem' }}>
-                ONE CORE. EVERY EXPERIENCE.
-              </span>
-
-              <h3 style={{ color: '#020617', fontSize: '2.25rem', lineHeight: '1.2' }}>
-                Run the school.
-                <br />
-                <em>Empower the people.</em>
-              </h3>
-
-              <p style={{ color: '#0f172a', fontSize: '1.1rem' }}>
-                Designed to give administrators, teachers, students, and parents the visibility and tools they need.
-              </p>
-
-              <div className="feature-list">
-                {coreOneFeatures.map((feature) => {
-                  const FeatureIcon = feature.icon;
-
-                  return (
-                    <div className="feature-item" key={feature.title} style={{ background: '#ffffff', borderColor: '#cbd5e1' }}>
-                      <span className="feature-icon" style={{ color: '#4f46e5' }}>
-                        <FeatureIcon size={20} />
-                      </span>
-
-                      <div>
-                        <b style={{ color: '#020617', fontSize: '1.05rem' }}>{feature.title}</b>
-                        <p style={{ color: '#0f172a', fontSize: '0.95rem' }}>{feature.text}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            <div className="coreone-ui">
-              <div className="device-back" />
-
-              <div className="core-dashboard">
-                <div className="cd-top">
-                  <span className="cd-brand">CoreOne</span>
-
-                  <div className="cd-actions">
-                    <span>Search</span>
-                    <b>MT</b>
-                  </div>
-                </div>
-
-                <div className="cd-content">
-                  <div className="cd-side">
-                    <div className="active">Overview</div>
-                    <div>Students</div>
-                    <div>Academics</div>
-                    <div>Learning</div>
-                    <div>Attendance</div>
-                    <div>Communication</div>
-                    <div>Reports</div>
-                  </div>
-
-                  <div className="cd-workspace">
-                    <div className="welcome">
-                      Good morning, School Admin <span>✦</span>
-                    </div>
-
-                    <div className="workspace-sub">
-                      Everything important, in one place.
-                    </div>
-
-                    <div className="stat-cards">
-                      <div>
-                        <small>Students</small>
-                        <strong>1,842</strong>
-                        <span>+12.4%</span>
-                      </div>
-
-                      <div>
-                        <small>Attendance</small>
-                        <strong>94.8%</strong>
-                        <span>+2.1%</span>
-                      </div>
-
-                      <div>
-                        <small>Classes</small>
-                        <strong>38</strong>
-                        <span>+4.0%</span>
-                      </div>
-                    </div>
-
-                    <div className="wide-panel">
-                      <div className="panel-title">
-                        <b>School activity</b>
-                        <span>View report →</span>
-                      </div>
-
-                      <div className="bars">
-                        <i />
-                        <i />
-                        <i />
-                        <i />
-                        <i />
-                        <i />
-                        <i />
-                        <i />
-                        <i />
-                        <i />
-                        <i />
-                        <i />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="device-phone">
-                <div className="phone-notch" />
-
-                <div className="phone-screen">
-                  <span className="tiny-brand">CoreOne</span>
-                  <b>Good morning 👋</b>
-                  <small>Here&apos;s your learning snapshot.</small>
-
-                  <div className="phone-card" />
-                  <div className="phone-card second" />
-
-                  <div className="phone-nav">
-                    <i />
-                    <i />
-                    <i />
-                    <i />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="stats-grid">
-            {stats.map((stat) => (
-              <div key={stat.num} className="stat-box" style={{ background: '#ffffff', borderColor: '#cbd5e1' }}>
-                <span style={{ color: '#4f46e5', fontSize: '1.25rem', fontWeight: 800 }}>{stat.num}</span>
-
-                <div>
-                  <small style={{ color: '#0f172a', fontSize: '0.85rem', fontWeight: 700 }}>{stat.label}</small>
-                  <strong style={{ color: '#020617', fontSize: '1.15rem' }}>{stat.value}</strong>
-                </div>
-              </div>
+          <div className="showcase-filters" role="tablist" aria-label="CoreOne product areas">
+            {(['All', 'Admin', 'Teacher', 'Student', 'Staff', 'Parent'] as const).map((filter) => (
+              <button
+                key={filter}
+                type="button"
+                className={`showcase-filter ${galleryFilter === filter ? 'active' : ''}`}
+                onClick={() => {
+                  setGalleryFilter(filter);
+                  setSelectedGallery(null);
+                }}
+                aria-pressed={galleryFilter === filter}
+              >
+                {filter}
+              </button>
             ))}
           </div>
+
+          <div className="gallery-grid">
+            {galleryItems
+              .map((item, originalIndex) => ({ item, originalIndex }))
+              .filter(({ item }) => galleryFilter === 'All' || item.role === galleryFilter)
+              .map(({ item, originalIndex }) => (
+                <button
+                  type="button"
+                  className="gallery-card"
+                  key={item.title}
+                  onClick={() => setSelectedGallery(originalIndex)}
+                >
+                  <div className="gallery-image">
+                    <Image
+                      src={item.image}
+                      alt={`CoreOne ${item.role} - ${item.title}`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+
+                    <div className="gallery-overlay">
+                      <span>View screen</span>
+                      <ArrowRight size={15} />
+                    </div>
+                  </div>
+
+                  <div className="gallery-info">
+                    <span>{item.role} · {item.category}</span>
+                    <strong>{item.title}</strong>
+                    <p>{item.description}</p>
+                  </div>
+                </button>
+              ))}
+          </div>
         </div>
       </section>
 
-          
-      <section id="solutions" className="section solutions-section">
+      {/* SOLUTIONS */}
+      <section className="section solutions-section">
         <div className="container">
-          <div className="section-intro centered">
-            <span className="section-kicker" style={{ color: '#4f46e5', fontWeight: 700, fontSize: '0.85rem' }}>03 / WHAT WE DO</span>
+          <div className="section-heading">
+            <span className="section-number">04</span>
+            <div>
+              <span className="section-kicker">WHAT WE DO</span>
+              <h2>Technology with a purpose.</h2>
+            </div>
+          </div>
 
-            <h2 style={{ color: '#020617', fontSize: '2.5rem' }}>
-              Solutions built around <em>real operations.</em>
-            </h2>
+          <div className="solutions-grid">
+            <div className="solution-card">
+              <GraduationCap size={22} />
+              <span>01</span>
+              <h3>EdTech Solutions</h3>
+              <p>
+                Digital infrastructure for schools, learning and education
+                management.
+              </p>
+            </div>
 
-            <p style={{ color: '#0f172a', fontSize: '1.15rem' }}>
-              We focus on practical systems that create clarity, speed, and better experiences.
+            <div className="solution-card featured-solution">
+              <Zap size={22} />
+              <span>02</span>
+              <h3>Software Products</h3>
+              <p>
+                Purpose-built web and mobile applications designed around
+                actual workflows.
+              </p>
+            </div>
+
+            <div className="solution-card">
+              <BarChart3 size={22} />
+              <span>03</span>
+              <h3>Digital Transformation</h3>
+              <p>
+                Modern systems that replace disconnected processes with
+                connected operations.
+              </p>
+            </div>
+          </div>
+        </div>
+      
+        
+        {/* CLICK TO VISIT PRODUCT SOLUTIONS */}
+        <div style={{ textAlign: 'center', marginTop: '40px' }}>
+          <a
+            href="https://nexa-soft-martinez-solutions.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-block',
+              padding: '14px 28px',
+              backgroundColor: '#d9f99d',
+              color: '#17200b',
+              border: '1px solid #bef264',
+              borderRadius: '8px',
+              fontWeight: 700,
+              fontSize: '16px',
+              textDecoration: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            Visit Our Product Solutions →
+          </a>
+        </div>
+</section>
+
+
+      {/* ENTERPRISE SOLUTIONS VISUALS */}
+      <section id="enterprise-solutions" className="section enterprise-solutions-visual">
+        <div className="container">
+          <div className="section-heading enterprise-heading">
+            <div>
+              <span className="section-kicker">ENTERPRISE TECHNOLOGY</span>
+              <h2>Solutions built for modern organisations.</h2>
+            </div>
+            <p>
+              From enterprise software and analytics to digital transformation
+              and education technology, Core1 delivers practical systems that
+              help organisations operate smarter.
             </p>
           </div>
 
-          <div className="solution-grid">
-            {solutions.map((solution, index) => {
-              const SolutionIcon = solution.icon;
+          <div className="enterprise-image-grid">
 
-              return (
-                <article className="solution-card" key={solution.title} style={{ background: '#ffffff', borderColor: '#cbd5e1' }}>
-                  <div className="solution-index" style={{ color: '#64748b', fontWeight: 700 }}>
-                    0{index + 1}
-                  </div>
+            <article className="enterprise-image-card enterprise-large">
+              <img
+                src="https://channellife.com.au/uploads/story/2024/11/19/techday_22bd0af56512d9a73289.webp"
+                alt="Enterprise technology team working with digital systems"
+              />
+              <div className="enterprise-image-overlay">
+                <span>01</span>
+                <div>
+                  <h3>Enterprise Technology</h3>
+                  <p>Connected systems for complex business operations.</p>
+                </div>
+              </div>
+            </article>
 
-                  <div className="solution-icon" style={{ color: '#4f46e5' }}>
-                    <SolutionIcon size={32} />
-                  </div>
+            <article className="enterprise-image-card">
+              <img
+                src="https://tantainnovatives.com/images/blog/data-analytics.jpg"
+                alt="Business intelligence and analytics dashboard"
+              />
+              <div className="enterprise-image-overlay">
+                <span>02</span>
+                <div>
+                  <h3>Data & Analytics</h3>
+                  <p>Turn operational data into useful business intelligence.</p>
+                </div>
+              </div>
+            </article>
 
-                  <h3 style={{ color: '#020617', fontSize: '1.35rem' }}>{solution.title}</h3>
+            <article className="enterprise-image-card">
+              <img
+                src="https://www.visionarygroup.io/assets/images/gallery/about-section-card.jpg"
+                alt="Enterprise infrastructure and systems collaboration"
+              />
+              <div className="enterprise-image-overlay">
+                <span>03</span>
+                <div>
+                  <h3>Digital Infrastructure</h3>
+                  <p>Technology architecture designed to connect your operations.</p>
+                </div>
+              </div>
+            </article>
 
-                  <p style={{ color: '#0f172a', fontSize: '1.05rem', lineHeight: '1.6' }}>{solution.text}</p>
+            <article className="enterprise-image-card school-solution-card">
+              <img
+                src="https://www.laysantech.com/uploads/products/eda096b8eaac4d93b53ee8e411688378.jpg"
+                alt="School management software dashboard"
+              />
+              <div className="enterprise-image-overlay">
+                <span>04</span>
+                <div>
+                  <h3>Education Technology</h3>
+                  <p>CoreOne connects school administration, academics, payments and people.</p>
+                </div>
+              </div>
+            </article>
 
-                  <div className="solution-line" />
-                </article>
-              );
-            })}
-          </div>
-
-          <div style={{ textAlign: 'center', marginTop: '40px' }}>
-            <a
-              href="https://nexa-soft-martinez-solutions.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: 'inline-block',
-                padding: '14px 28px',
-                backgroundColor: '#d9f99d',
-                color: '#17200b',
-                border: '1px solid #bef264',
-                borderRadius: '8px',
-                fontWeight: 700,
-                fontSize: '16px',
-                textDecoration: 'none',
-                cursor: 'pointer',
-              }}
-            >
-              Visit Our Product Solutions →
-            </a>
           </div>
         </div>
       </section>
 
-
-
-
-      <section id="technology" className="section technology-section">
-        <div className="container tech-grid">
-          <div>
-            <span className="section-kicker" style={{ color: '#a5b4fc', fontWeight: 700 }}>04 / TECHNOLOGY</span>
-
-            <h2 style={{ fontSize: '2.5rem' }}>
-              Modern architecture. <em>Practical engineering.</em>
-            </h2>
-
-            <p style={{ fontSize: '1.15rem', color: '#e2e8f0', lineHeight: '1.6' }}>
-              We think beyond screens. Our products are shaped around secure architecture, reusable systems, clear interfaces, and connected data.
+      {/* PRICING */}
+      <section id="pricing" className="section pricing-section">
+        <div className="container pricing-container">
+          <div className="pricing-intro">
+            <span className="section-kicker">ESTIMATE YOUR PLAN</span>
+            <h2>See what your school could pay.</h2>
+            <p>
+              Adjust the number of students to get an instant example based on
+              ₦3,500 per student.
             </p>
+          </div>
+
+          <div className="calculator-card">
+            <div className="calculator-top">
+              <div>
+                <span className="calculator-label">NUMBER OF STUDENTS</span>
+                <strong>{students.toLocaleString()}</strong>
+              </div>
+
+              <div className="calculator-price">
+                <span>Estimated amount</span>
+                <strong>₦{totalPrice.toLocaleString()}</strong>
+                <small>₦3,500 / student</small>
+              </div>
+            </div>
+
+            <input
+              type="range"
+              min="50"
+              max="5000"
+              step="50"
+              value={students}
+              onChange={(event) => setStudents(Number(event.target.value))}
+              className="price-slider"
+              aria-label="Number of students"
+            />
+
+            <div className="slider-labels">
+              <span>50 students</span>
+              <span>2,500</span>
+              <span>5,000+</span>
+            </div>
+
+            <div className="calculator-note">
+              <CheckCircle2 size={16} />
+              This is an example estimate. Final pricing can be discussed
+              during your consultation.
+            </div>
 
             <button
               type="button"
-              className="outline-btn"
-              onClick={() => scrollTo('contact')}
-              style={{ fontSize: '1rem' }}
+              className="button button-primary"
+              onClick={() => scrollTo('booking')}
             >
-              Start a conversation
+              Discuss Your School
               <ArrowRight size={16} />
             </button>
           </div>
-
-          <div className="tech-visual">
-            <div className="tech-core">
-              <Cpu size={28} />
-
-              <strong>
-                SKILLFORGE
-                <br />
-                <span>ENGINEERING LAYER</span>
-              </strong>
-            </div>
-
-            <div className="tech-node n1">
-              <Cloud size={17} />
-              Cloud
-            </div>
-
-            <div className="tech-node n2">
-              <MonitorSmartphone size={17} />
-              Web + Mobile
-            </div>
-
-            <div className="tech-node n3">
-              <ShieldCheck size={17} />
-              Security
-            </div>
-
-            <div className="tech-node n4">
-              <BarChart3 size={17} />
-              Data
-            </div>
-
-            <div className="tech-lines">
-              <span />
-              <span />
-              <span />
-              <span />
-            </div>
-          </div>
         </div>
       </section>
 
-      <section className="section cta-section">
-        <div className="container cta-inner">
-          <div>
-            <span className="section-kicker">LET&apos;S BUILD</span>
-
-            <h2 style={{ fontSize: '2.5rem' }}>
-              Have a challenge worth <em>solving?</em>
-            </h2>
-
-            <p style={{ fontSize: '1.15rem' }}>
-              Tell us what you&apos;re building, changing, or trying to improve. Let&apos;s turn the idea into something useful.
+      {/* BOOKING */}
+      <section id="booking" className="section booking-section">
+        <div className="container booking-grid">
+          <div className="booking-copy">
+            <span className="section-kicker">BOOK A DEMO / CONSULTATION</span>
+            <h2>Let's show you what CoreOne can do.</h2>
+            <p>
+              Tell us who you are and what you need. Our team will get back to
+              you to arrange a suitable conversation.
             </p>
-          </div>
 
-          <button
-            type="button"
-            className="primary-btn large"
-            onClick={() => scrollTo('contact')}
-          >
-            Start a conversation
-            <ArrowRight size={18} />
-          </button>
-        </div>
-      </section>
-
-      {/* ORGANOGRAM TEAM SECTION */}
-      <section id="team" className="section team-section">
-        <div className="container">
-          <div className="section-intro centered team-heading">
-            <span className="section-kicker" style={{ color: '#4f46e5', fontWeight: 700, fontSize: '0.85rem' }}>05 / ORGANOGRAM</span>
-
-            <h2 style={{ color: '#020617', fontSize: '2.5rem' }}>
-              Organizational <em>Structure.</em>
-            </h2>
-
-            <p style={{ color: '#0f172a', fontSize: '1.15rem' }}>
-              Click any node in the organogram to view complete profile details.
-            </p>
-          </div>
-
-          <div style={{ maxWidth: '1000px', margin: '2rem auto 0 auto', position: 'relative' }}>
-            {/* Executive Level (Top Node) */}
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <button
-                type="button"
-                onClick={() => setSelectedMember(executiveMember)}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  textAlign: 'center',
-                  background: '#ffffff',
-                  border: '2px solid #4f46e5',
-                  borderRadius: '16px',
-                  padding: '1.5rem',
-                  cursor: 'pointer',
-                  width: '100%',
-                  maxWidth: '280px',
-                  boxShadow: '0 10px 25px -5px rgba(79, 70, 229, 0.15)',
-                  position: 'relative',
-                  zIndex: 2,
-                }}
-              >
-                <div style={{
-                  position: 'relative',
-                  width: '90px',
-                  height: '90px',
-                  borderRadius: '50%',
-                  overflow: 'hidden',
-                  border: '3px solid #4f46e5',
-                  marginBottom: '0.85rem',
-                }}>
-                  <Image
-                    src={executiveMember.image}
-                    alt={executiveMember.name}
-                    fill
-                    style={{ objectFit: 'cover' }}
-                  />
-                </div>
-                <strong style={{ color: '#020617', fontSize: '1.1rem', fontWeight: 800 }}>{executiveMember.name}</strong>
-                <span style={{ color: '#4f46e5', fontSize: '0.85rem', marginTop: '0.2rem', fontWeight: 700 }}>{executiveMember.role}</span>
-                <span style={{
-                  marginTop: '0.85rem',
-                  fontSize: '0.75rem',
-                  fontWeight: '700',
-                  color: '#ffffff',
-                  background: '#4f46e5',
-                  padding: '0.3rem 0.75rem',
-                  borderRadius: '999px',
-                }}>
-                  Executive Lead
-                </span>
-              </button>
-            </div>
-
-            {/* Connecting Vertical Line from Executive */}
-            <div style={{
-              width: '2px',
-              height: '40px',
-              backgroundColor: '#cbd5e1',
-              margin: '0 auto',
-            }} />
-
-            {/* Horizontal Branching Bar */}
-            <div style={{
-              position: 'relative',
-              maxWidth: '780px',
-              margin: '0 auto',
-            }}>
-              <div style={{
-                position: 'absolute',
-                top: 0,
-                left: '12.5%',
-                right: '12.5%',
-                height: '2px',
-                backgroundColor: '#cbd5e1',
-              }} />
-
-              {/* Subordinate Grid Nodes */}
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))',
-                gap: '1.5rem',
-                paddingTop: '20px',
-              }}>
-                {subTeamMembers.map((member) => (
-                  <div key={member.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    {/* Vertical Drop Line to Node */}
-                    <div style={{
-                      width: '2px',
-                      height: '20px',
-                      backgroundColor: '#cbd5e1',
-                      marginTop: '-20px',
-                    }} />
-
-                    <button
-                      type="button"
-                      onClick={() => setSelectedMember(member)}
-                      style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        textAlign: 'center',
-                        background: '#ffffff',
-                        border: '1px solid #cbd5e1',
-                        borderRadius: '12px',
-                        padding: '1.25rem 0.75rem',
-                        cursor: 'pointer',
-                        width: '100%',
-                        height: '100%',
-                        transition: 'transform 0.2s ease, border-color 0.2s ease',
-                      }}
-                    >
-                      <div style={{
-                        position: 'relative',
-                        width: '70px',
-                        height: '70px',
-                        borderRadius: '50%',
-                        overflow: 'hidden',
-                        border: '2px solid #64748b',
-                        marginBottom: '0.75rem',
-                      }}>
-                        <Image
-                          src={member.image}
-                          alt={member.name}
-                          fill
-                          style={{ objectFit: 'cover' }}
-                        />
-                      </div>
-                      <strong style={{ color: '#020617', fontSize: '0.95rem', lineHeight: '1.3', fontWeight: 700 }}>{member.name}</strong>
-                      <span style={{ color: '#0f172a', fontSize: '0.8rem', marginTop: '0.25rem', fontWeight: 600 }}>{member.role}</span>
-                      <span style={{
-                        marginTop: 'auto',
-                        paddingTop: '0.75rem',
-                        fontSize: '0.75rem',
-                        fontWeight: '700',
-                        color: '#4f46e5',
-                      }}>
-                        View profile →
-                      </span>
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* TEAM DETAILS MODAL */}
-      {selectedMember && (
-        <div
-          style={{
-            position: 'fixed',
-            inset: 0,
-            zIndex: 1000,
-            backgroundColor: 'rgba(2, 6, 23, 0.8)',
-            backdropFilter: 'blur(4px)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '1rem',
-          }}
-          onClick={() => setSelectedMember(null)}
-        >
-          <div
-            style={{
-              position: 'relative',
-              width: '100%',
-              maxWidth: '600px',
-              backgroundColor: '#ffffff',
-              borderRadius: '16px',
-              boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
-              overflow: 'hidden',
-              maxHeight: '90vh',
-              display: 'flex',
-              flexDirection: 'column',
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              padding: '1.25rem 1.5rem',
-              borderBottom: '1px solid #cbd5e1',
-              backgroundColor: '#f8fafc',
-            }}>
+            <div className="booking-points">
               <div>
-                <span style={{ color: '#4f46e5', fontSize: '0.8rem', fontWeight: 800 }}>SKILLFORGE / {selectedMember.number}</span>
-                <h3 style={{ margin: 0, fontSize: '1.35rem', color: '#020617', fontWeight: 800 }}>{selectedMember.name}</h3>
-                <small style={{ color: '#0f172a', fontWeight: 700, fontSize: '0.85rem' }}>{selectedMember.role}</small>
+                <CalendarCheck size={18} />
+                <span>Product demonstrations</span>
               </div>
-
-              <button
-                type="button"
-                onClick={() => setSelectedMember(null)}
-                style={{
-                  background: 'transparent',
-                  border: 'none',
-                  cursor: 'pointer',
-                  color: '#020617',
-                  padding: '0.5rem',
-                }}
-              >
-                <X size={22} />
-              </button>
-            </div>
-
-            <div style={{ padding: '1.5rem', overflowY: 'auto' }}>
-              <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
-                <div style={{
-                  position: 'relative',
-                  width: '130px',
-                  height: '150px',
-                  borderRadius: '10px',
-                  overflow: 'hidden',
-                  flexShrink: 0,
-                }}>
-                  <Image
-                    src={selectedMember.image}
-                    alt={selectedMember.name}
-                    fill
-                    style={{ objectFit: 'cover' }}
-                  />
-                </div>
-
-                <div style={{ flex: 1, minWidth: '240px' }}>
-                  {selectedMember.bio.map((para, idx) => (
-                    <p key={idx} style={{ color: '#0f172a', fontSize: '1rem', lineHeight: '1.65', marginTop: idx === 0 ? 0 : '0.85rem' }}>
-                      {para}
-                    </p>
-                  ))}
-                </div>
+              <div>
+                <MessageCircle size={18} />
+                <span>Questions and consultation</span>
               </div>
-
-              {selectedMember.highlights && (
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-                  gap: '0.85rem',
-                  marginTop: '1.5rem',
-                  paddingTop: '1.25rem',
-                  borderTop: '1px solid #cbd5e1',
-                }}>
-                  {selectedMember.highlights.map((h) => (
-                    <div key={h.number} style={{ background: '#f8fafc', padding: '0.85rem', borderRadius: '8px', border: '1px solid #cbd5e1' }}>
-                      <span style={{ color: '#4f46e5', fontSize: '0.8rem', fontWeight: 800 }}>{h.number}</span>
-                      <strong style={{ display: 'block', color: '#020617', fontSize: '0.9rem', margin: '0.2rem 0', fontWeight: 700 }}>{h.title}</strong>
-                      <p style={{ color: '#0f172a', fontSize: '0.8rem', margin: 0 }}>{h.desc}</p>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* CONTACT SECTION */}
-      <section id="contact" className="section contact-section">
-        <div className="container contact-grid">
-          <div>
-            <span className="section-kicker" style={{ color: '#4f46e5', fontWeight: 700, fontSize: '0.85rem' }}>06 / CONTACT</span>
-
-            <h2 style={{ color: '#020617', fontSize: '2.5rem' }}>
-              Let&apos;s make <em>something meaningful.</em>
-            </h2>
-
-            <p style={{ color: '#0f172a', fontSize: '1.15rem' }}>
-              For CoreOne enquiries, partnerships, product support, or technology projects, SkillForge is ready to hear from you.
-            </p>
-
-            <div className="contact-links">
-              <a href="tel:08035269983" style={{ background: '#ffffff', borderColor: '#cbd5e1' }}>
-                <span style={{ color: '#4f46e5', fontWeight: 800 }}>01</span>
-
-                <div>
-                  <small style={{ color: '#0f172a', fontWeight: 700, fontSize: '0.85rem' }}>Calls</small>
-                  <strong style={{ color: '#020617', fontSize: '1.1rem' }}>08035269983</strong>
-                </div>
-
-                <ArrowRight />
-              </a>
-
-              <a
-                href="https://wa.me/2349045531092"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ background: '#ffffff', borderColor: '#cbd5e1' }}
-              >
-                <span style={{ color: '#4f46e5', fontWeight: 800 }}>02</span>
-
-                <div>
-                  <small style={{ color: '#0f172a', fontWeight: 700, fontSize: '0.85rem' }}>WhatsApp</small>
-                  <strong style={{ color: '#020617', fontSize: '1.1rem' }}>09045531092</strong>
-                </div>
-
-                <ArrowRight />
-              </a>
-
-              <a href="mailto:skillforge82@gmail.com" style={{ background: '#ffffff', borderColor: '#cbd5e1' }}>
-                <span style={{ color: '#4f46e5', fontWeight: 800 }}>03</span>
-
-                <div>
-                  <small style={{ color: '#0f172a', fontWeight: 700, fontSize: '0.85rem' }}>Email</small>
-                  <strong style={{ color: '#020617', fontSize: '1.1rem' }}>skillforge82@gmail.com</strong>
-                </div>
-
-                <ArrowRight />
-              </a>
+              <div>
+                <MonitorSmartphone size={18} />
+                <span>School onboarding discussions</span>
+              </div>
             </div>
           </div>
 
           <form
-            className="contact-form"
+            className="booking-form"
             onSubmit={handleFormSubmit}
-            style={{ background: '#ffffff', borderColor: '#cbd5e1' }}
           >
-            <div className="form-title" style={{ color: '#020617', fontSize: '1.2rem', fontWeight: 700 }}>
-              <MessageCircle size={20} />
-              <span>Send an enquiry</span>
+            <input type="hidden" name="_subject" value="New Core1 Website Booking" />
+
+            <div className="form-row">
+              <label>
+                Full name
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Your full name"
+                  required
+                />
+              </label>
+
+              <label>
+                Phone number
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="080..."
+                  required
+                />
+              </label>
             </div>
 
-            {formState.succeeded ? (
+            <label>
+              Email address
+              <input
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                required
+              />
+            </label>
+
+            <label>
+              I am booking as
+              <select name="booking_type" defaultValue="" required>
+                <option value="" disabled>
+                  Select one
+                </option>
+                {bookingTypes.map((type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              Organization / School
+              <input
+                type="text"
+                name="organization"
+                placeholder="School or organization name"
+              />
+            </label>
+
+            <label>
+              What would you like to discuss?
+              <textarea
+                name="message"
+                rows={4}
+                placeholder="Tell us briefly what you need..."
+                required
+              />
+            </label>
+
+            <button
+              type="submit"
+              className="button button-primary form-submit"
+              disabled={formState.submitting}
+            >
+              {formState.submitting ? 'Sending...' : 'Request a Demo'}
+              <ArrowRight size={16} />
+            </button>
+
+            {formState.succeeded && (
               <div className="form-success">
-                <div className="form-success-icon">
-                  <ShieldCheck size={20} />
-                </div>
-
-                <h3 style={{ color: '#020617', fontSize: '1.2rem' }}>Thank you. Your enquiry has been received.</h3>
-
-                <p style={{ color: '#0f172a', fontSize: '1rem' }}>
-                  Our team will review your message and get back to you as soon as possible.
-                </p>
+                <CheckCircle2 size={18} />
+                Thank you. Your request has been received.
               </div>
-            ) : (
-              <>
-                <input
-                  type="hidden"
-                  name="_subject"
-                  value="New SkillForge Website Enquiry"
-                />
-
-                <label style={{ color: '#020617', fontWeight: 700, fontSize: '0.95rem' }}>
-                  Name
-                  <input
-                    name="name"
-                    type="text"
-                    placeholder="Your full name"
-                    autoComplete="name"
-                    required
-                    style={{ color: '#020617', borderColor: '#94a3b8', fontSize: '1rem' }}
-                  />
-                </label>
-
-                <label style={{ color: '#020617', fontWeight: 700, fontSize: '0.95rem' }}>
-                  Email
-                  <input
-                    name="email"
-                    type="email"
-                    placeholder="you@company.com"
-                    autoComplete="email"
-                    required
-                    style={{ color: '#020617', borderColor: '#94a3b8', fontSize: '1rem' }}
-                  />
-                </label>
-
-                <label style={{ color: '#020617', fontWeight: 700, fontSize: '0.95rem' }}>
-                  Phone
-                  <input
-                    name="phone"
-                    type="tel"
-                    placeholder="08035269983"
-                    autoComplete="tel"
-                    style={{ color: '#020617', borderColor: '#94a3b8', fontSize: '1rem' }}
-                  />
-                </label>
-
-                <label style={{ color: '#020617', fontWeight: 700, fontSize: '0.95rem' }}>
-                  What can we help with?
-                  <select name="area" defaultValue="" required style={{ color: '#020617', borderColor: '#94a3b8', fontSize: '1rem' }}>
-                    <option value="" disabled>
-                      Select an area
-                    </option>
-                    <option value="CoreOne">CoreOne</option>
-                    <option value="Technology solutions">Technology solutions</option>
-                    <option value="Partnership">Partnership</option>
-                    <option value="Product support">Product support</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </label>
-
-                <label style={{ color: '#020617', fontWeight: 700, fontSize: '0.95rem' }}>
-                  Message
-                  <textarea
-                    name="message"
-                    rows={5}
-                    placeholder="Tell us a little about what you need..."
-                    required
-                    style={{ color: '#020617', borderColor: '#94a3b8', fontSize: '1rem' }}
-                  />
-                </label>
-
-                {formState.errors && (
-                  <p className="form-error" style={{ color: '#dc2626', fontWeight: 600 }}>
-                    Something went wrong while sending your enquiry. Please try again.
-                  </p>
-                )}
-
-                <button
-                  className="primary-btn"
-                  type="submit"
-                  disabled={formState.submitting}
-                  style={{ fontSize: '1rem' }}
-                >
-                  {formState.submitting
-                    ? 'Sending enquiry...'
-                    : 'Send enquiry'}
-
-                  <ArrowRight size={16} />
-                </button>
-
-                <p className="form-note" style={{ color: '#0f172a', fontWeight: 500 }}>
-                  Your enquiry will be securely submitted through Formspree.
-                </p>
-              </>
             )}
           </form>
         </div>
       </section>
 
-      <footer className="site-footer">
-        <div className="container footer-top">
-          <div className="footer-brand">
-            <span className="brand-logo footer-logo">
-              <Image
-                src="/logo.png"
-                alt="SkillForge Technologies & Solutions Ltd"
-                width={150}
-                height={48}
-              />
-            </span>
-
+      {/* TEAM */}
+      <section id="team" className="section section-light team-section">
+        <div className="container">
+          <div className="section-heading">
+            <span className="section-number">05</span>
             <div>
-              <strong style={{ color: '#ffffff', fontSize: '1.1rem' }}>SKILLFORGE</strong>
-              <small style={{ color: '#cbd5e1', fontSize: '0.85rem' }}>Technologies &amp; Solutions Ltd</small>
+              <span className="section-kicker">OUR TEAM</span>
+              <h2>People behind the products.</h2>
+              <p>
+                A focused team combining technology, product and customer
+                experience.
+              </p>
             </div>
           </div>
 
-          <div className="footer-links" style={{ fontSize: '0.95rem' }}>
-            <button type="button" onClick={() => scrollTo('company')}>Company</button>
-            <button type="button" onClick={() => scrollTo('coreone')}>CoreOne</button>
-            <button type="button" onClick={() => scrollTo('solutions')}>Solutions</button>
-            <button type="button" onClick={() => scrollTo('team')}>Team</button>
-            <button type="button" onClick={() => scrollTo('contact')}>Contact</button>
+          <div className="team-grid">
+            {teamMembers.map((member) => (
+              <button
+                type="button"
+                className="team-card"
+                key={member.id}
+                onClick={() => setSelectedMember(member)}
+              >
+                <div className="team-photo">
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    sizes="180px"
+                  />
+                </div>
+                <div className="team-details">
+                  <strong>{member.name}</strong>
+                  <span>{member.role}</span>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CONTACT */}
+      <section id="contact" className="section contact-section">
+        <div className="container contact-grid">
+          <div>
+            <span className="section-kicker">06 / CONTACT</span>
+            <h2>Have a technology challenge?</h2>
+            <p>
+              Talk to Core1 Enterprise Solution about CoreOne, software
+              products, partnerships or technology projects.
+            </p>
           </div>
 
           <div className="contact-details">
-            <a className="contact-detail" href="tel:08035269983">
-              <span style={{ color: '#cbd5e1' }}>Calls</span>
-              <strong style={{ color: '#ffffff', fontSize: '1rem' }}>08035269983</strong>
+            <a href="tel:08035269983">
+              <span>Phone</span>
+              <strong>0803 526 9983</strong>
             </a>
 
             <a
-              className="contact-detail"
               href="https://wa.me/2349045531092"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noreferrer"
             >
-              <span style={{ color: '#cbd5e1' }}>WhatsApp</span>
-              <strong style={{ color: '#ffffff', fontSize: '1rem' }}>09045531092</strong>
+              <span>WhatsApp</span>
+              <strong>0904 553 1092</strong>
             </a>
 
-            <a className="contact-detail" href="mailto:skillforge82@gmail.com">
-              <span style={{ color: '#cbd5e1' }}>Email</span>
-              <strong style={{ color: '#ffffff', fontSize: '1rem' }}>skillforge82@gmail.com</strong>
+            <a href="mailto:core1enterprisesolutions@gmail.com">
+              <span>Email</span>
+              <strong>core1enterprisesolutions@gmail.com</strong>
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="site-footer">
+        <div className="container footer-grid">
+          <div className="footer-brand">
+            <div className="footer-mark">C1</div>
+            <div>
+              <strong>Core1 Enterprise Solution</strong>
+              <span>Technology • Products • Solutions</span>
+            </div>
+          </div>
+
+          <div className="footer-links">
+            <button type="button" onClick={() => scrollTo('company')}>
+              Company
+            </button>
+            <button type="button" onClick={() => scrollTo('coreone')}>
+              CoreOne
+            </button>
+            <button type="button" onClick={() => scrollTo('showcase')}>
+              Product
+            </button>
+            <button type="button" onClick={() => scrollTo('booking')}>
+              Book a Demo
+            </button>
+          </div>
+
+          <div className="footer-bottom">
+            © 2026 Core1 Enterprise Solution. All rights reserved.
+          </div>
+        </div>
+      </footer>
+
+      {/* GALLERY LIGHTBOX */}
+      {selectedGallery !== null && galleryItems[selectedGallery] && (
+        <div
+          className="gallery-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${galleryItems[selectedGallery].title} preview`}
+          onClick={closeGallery}
+        >
+          <button
+            type="button"
+            className="lightbox-close"
+            onClick={closeGallery}
+            aria-label="Close image preview"
+          >
+            <X size={24} />
+          </button>
+
+          <button
+            type="button"
+            className="lightbox-arrow lightbox-arrow-left"
+            onClick={(event) => {
+              event.stopPropagation();
+              previousGallery();
+            }}
+            aria-label="Previous screenshot"
+          >
+            <ChevronLeft size={28} />
+          </button>
+
+          <div
+            className="gallery-lightbox-content"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="gallery-lightbox-image">
+              <Image
+                src={galleryItems[selectedGallery].image}
+                alt={`CoreOne ${galleryItems[selectedGallery].role} - ${galleryItems[selectedGallery].title}`}
+                fill
+                sizes="90vw"
+                priority
+              />
+            </div>
+
+            <div className="gallery-lightbox-info">
+              <span>
+                {galleryItems[selectedGallery].role} · {galleryItems[selectedGallery].category}
+              </span>
+              <h3>{galleryItems[selectedGallery].title}</h3>
+              <p>{galleryItems[selectedGallery].description}</p>
+            </div>
           </div>
 
           <button
             type="button"
-            className="back-top"
-            onClick={() => scrollTo('home')}
-            style={{ fontSize: '0.9rem' }}
+            className="lightbox-arrow lightbox-arrow-right"
+            onClick={(event) => {
+              event.stopPropagation();
+              nextGallery();
+            }}
+            aria-label="Next screenshot"
           >
-            Back to top ↑
+            <ChevronRight size={28} />
           </button>
         </div>
+      )}
 
-        <div className="container footer-bottom" style={{ fontSize: '0.85rem', color: '#cbd5e1' }}>
-          <span>
-            © 2026 SkillForge Technologies &amp; Solutions Ltd. All rights reserved.
-          </span>
+      {selectedMember && (
+        <div
+          className="team-modal"
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setSelectedMember(null)}
+        >
+          <div
+            className="team-modal-card"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="modal-close"
+              onClick={() => setSelectedMember(null)}
+              aria-label="Close profile"
+            >
+              <X size={20} />
+            </button>
 
-          <span>Building what moves tomorrow.</span>
+            <div className="modal-photo">
+              <Image
+                src={selectedMember.image}
+                alt={selectedMember.name}
+                fill
+                sizes="140px"
+              />
+            </div>
+
+            <span className="modal-label">CORE1 ENTERPRISE SOLUTION</span>
+            <h3>{selectedMember.name}</h3>
+            <strong>{selectedMember.role}</strong>
+            <p>{selectedMember.bio}</p>
+          </div>
         </div>
-      </footer>
+      )}
+
+      <a
+        className="floating-whatsapp"
+        href="https://wa.me/2349045531092"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Chat on WhatsApp"
+      >
+        <MessageCircle size={21} />
+      </a>
     </main>
   );
 }
