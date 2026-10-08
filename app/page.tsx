@@ -192,6 +192,13 @@ const teamMembers: TeamMember[] = [
     bio: 'Leads product strategy, technology and the development of practical digital solutions, including CoreOne.',
   },
   {
+    id: 'modestus',
+    name: 'Engr. Modestus Nwachukwu',
+    role: 'Co-Founder',
+    image: '/cofounder.jpeg',
+    bio: 'Provides strategic leadership, financial backing and valuable expertise that have been instrumental to the growth and development of Core1 Enterprise Solution.',
+  },
+  {
     id: 'elijah',
     name: 'Mr Etim Elijah Ime',
     role: 'Sales Manager',
@@ -972,8 +979,8 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="team-grid">
-            {teamMembers.map((member) => (
+          <div className="team-featured-row">
+            {teamMembers.slice(0, 2).map((member) => (
               <button
                 type="button"
                 className="team-card"
@@ -985,7 +992,31 @@ export default function Home() {
                     src={member.image}
                     alt={member.name}
                     fill
-                    sizes="180px"
+                    sizes="(max-width: 620px) 100vw, 50vw"
+                  />
+                </div>
+                <div className="team-details">
+                  <strong>{member.name}</strong>
+                  <span>{member.role}</span>
+                </div>
+              </button>
+            ))}
+          </div>
+
+          <div className="team-grid team-grid-rest">
+            {teamMembers.slice(2).map((member) => (
+              <button
+                type="button"
+                className="team-card"
+                key={member.id}
+                onClick={() => setSelectedMember(member)}
+              >
+                <div className="team-photo">
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    sizes="(max-width: 620px) 100vw, 33vw"
                   />
                 </div>
                 <div className="team-details">
