@@ -2814,3 +2814,41 @@ body {
     object-position: center 16% !important;
   }
 }
+
+
+/* CORE1 MOBILE TEAM GRID */
+
+@media (max-width: 620px) {
+  .team-featured-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .team-grid-rest {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .team-photo,
+  .team-featured-row .team-photo {
+    width: 92px;
+    height: 92px;
+    min-width: 92px;
+    min-height: 92px;
+    margin-bottom: 10px;
+  }
+
+  .team-details strong {
+    display: block;
+    font-size: 0.78rem;
+    line-height: 1.25;
+  }
+
+  .team-details span {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.68rem;
+    line-height: 1.25;
+  }
+}
