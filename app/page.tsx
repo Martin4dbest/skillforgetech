@@ -256,7 +256,7 @@ export default function Home() {
   const formId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID || 'xrpggbar';
   const [formState, handleFormSubmit] = useForm(formId);
 
-  const pricePerStudent = 3500;
+  const pricePerStudent = 1500;
   const totalPrice = students * pricePerStudent;
 
   const scrollTo = (id: string) => {
@@ -794,7 +794,7 @@ export default function Home() {
             <h2>See what your school could pay.</h2>
             <p>
               Adjust the number of students to get an instant example based on
-              ₦3,500 per student.
+              ₦1,500 per student.
             </p>
           </div>
 
