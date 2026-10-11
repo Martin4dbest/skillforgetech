@@ -808,7 +808,7 @@ export default function Home() {
               <div className="calculator-price">
                 <span>Estimated amount</span>
                 <strong>₦{totalPrice.toLocaleString()}</strong>
-                <small>₦3,500 / student</small>
+                <small>₦1,500 / student</small>
               </div>
             </div>
 
