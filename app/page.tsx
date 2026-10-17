@@ -198,6 +198,17 @@ const teamMembers: TeamMember[] = [
     image: '/cofounder.jpeg',
     bio: 'Provides strategic leadership, financial backing and valuable expertise that have been instrumental to the growth and development of Core1 Enterprise Solution.',
   },
+
+   
+  {
+    id: 'grace',
+    name: 'Ms Grace A',
+    role: 'Sales & Human Resources Executive',
+    image: '/grace1.jpeg',
+    bio: 'Leads and supervises all sales representatives, drives business growth, acquires new school clients, and coordinates HR activities at CoreOne Enterprise Solution.',
+  },
+
+
   {
     id: 'elijah',
     name: 'Mr Etim Elijah Ime',
