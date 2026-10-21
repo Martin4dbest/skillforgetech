@@ -30,6 +30,7 @@ type GalleryItem = {
   image: string;
 };
 
+/*
 type TeamMember = {
   id: string;
   name: string;
@@ -37,6 +38,7 @@ type TeamMember = {
   image: string;
   bio: string;
 };
+*/
 
 const galleryItems: GalleryItem[] = [
   // ADMIN
@@ -183,6 +185,7 @@ const galleryItems: GalleryItem[] = [
   },
 ];
 
+/*
 const teamMembers: TeamMember[] = [
   {
     id: 'martin',
@@ -198,8 +201,6 @@ const teamMembers: TeamMember[] = [
     image: '/cofounder.jpeg',
     bio: 'Provides strategic leadership, financial backing and valuable expertise that have been instrumental to the growth and development of Core1 Enterprise Solution.',
   },
-
-   
   {
     id: 'grace',
     name: 'Ms Grace A',
@@ -207,8 +208,6 @@ const teamMembers: TeamMember[] = [
     image: '/grace1.jpeg',
     bio: 'Leads and supervises all sales representatives, drives business growth, acquires new school clients, and coordinates HR activities at CoreOne Enterprise Solution.',
   },
-
-
   {
     id: 'elijah',
     name: 'Mr Etim Elijah Ime',
@@ -245,6 +244,7 @@ const teamMembers: TeamMember[] = [
     bio: 'Combines product support with customer engagement and demonstrations.',
   },
 ];
+*/
 
 const bookingTypes = [
   'School Owner / Proprietor',
@@ -261,7 +261,7 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedGallery, setSelectedGallery] = useState<number | null>(null);
   const [galleryFilter, setGalleryFilter] = useState<'All' | GalleryItem['role']>('All');
-  const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
+  // const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
   const [students, setStudents] = useState(500);
 
   const formId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID || 'xrpggbar';
@@ -975,7 +975,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TEAM */}
+      {/* TEAM SECTION COMMENTED OUT */}
+      {/* 
       <section id="team" className="section section-light team-section">
         <div className="container">
           <div className="section-heading">
@@ -1039,12 +1040,13 @@ export default function Home() {
           </div>
         </div>
       </section>
+      */}
 
       {/* CONTACT */}
       <section id="contact" className="section contact-section">
         <div className="container contact-grid">
           <div>
-            <span className="section-kicker">06 / CONTACT</span>
+            <span className="section-kicker">05 / CONTACT</span>
             <h2>Have a technology challenge?</h2>
             <p>
               Talk to Core1 Enterprise Solution about CoreOne, software
@@ -1174,6 +1176,8 @@ export default function Home() {
         </div>
       )}
 
+      {/* TEAM MODAL COMMENTED OUT */}
+      {/* 
       {selectedMember && (
         <div
           className="team-modal"
@@ -1210,6 +1214,7 @@ export default function Home() {
           </div>
         </div>
       )}
+      */}
 
       <a
         className="floating-whatsapp"
