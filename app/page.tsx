@@ -715,8 +715,8 @@ export default function Home() {
             }}
           >
             Visit Our Product Solutions →
-          </a>
-<a href="https://github.com/Martin4dbest/brainlead-android-downloads/releases/download/brainlead-android-v1/application-aa983b29-4ac8-4e14-be10-534f5ab35775.apk" aria-label="Download BrainLeague for Android" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#ffb45f] to-[#f59a35] px-5 py-3 text-sm font-extrabold text-[#172541] shadow-lg shadow-orange-500/25 ring-1 ring-orange-300/60 transition hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-200"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-5 w-5"><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v12m0 0 4-4m-4 4-4-4M5 17v3h14v-3"/></svg>Download BrainLeague</a>
+          </a><a href="https://github.com/Martin4dbest/brainlead-android-downloads/releases/download/brainlead-android-v1/application-aa983b29-4ac8-4e14-be10-534f5ab35775.apk" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#f59a35] px-5 py-3 text-sm font-extrabold text-[#172541] shadow-lg transition hover:-translate-y-0.5 hover:bg-[#ffb45f]">↓ Download BrainLeague</a>
+
         </div>
 </section>
 
