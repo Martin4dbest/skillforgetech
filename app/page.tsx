@@ -339,6 +339,7 @@ export default function Home() {
             </button>
           </nav>
 
+          <a href="https://github.com/Martin4dbest/brainlead-android-downloads/releases/download/brainlead-android-v1/application-aa983b29-4ac8-4e14-be10-534f5ab35775.apk" aria-label="Download BrainLeague APK" style={{display:"inline-flex",alignItems:"center",justifyContent:"center",gap:"8px",padding:"12px 16px",marginRight:"10px",borderRadius:"8px",backgroundColor:"#f59a35",color:"#172541",fontWeight:700,textDecoration:"none",whiteSpace:"nowrap"}}>↓ Download BrainLeague</a>
           <button
             type="button"
             className="nav-cta"
@@ -715,7 +716,7 @@ export default function Home() {
             }}
           >
             Visit Our Product Solutions →
-          </a><a href="https://github.com/Martin4dbest/brainlead-android-downloads/releases/download/brainlead-android-v1/application-aa983b29-4ac8-4e14-be10-534f5ab35775.apk" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#f59a35] px-5 py-3 text-sm font-extrabold text-[#172541] shadow-lg transition hover:-translate-y-0.5 hover:bg-[#ffb45f]">↓ Download BrainLeague</a>
+          </a>
 
         </div>
 </section>
