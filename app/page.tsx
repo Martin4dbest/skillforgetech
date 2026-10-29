@@ -391,14 +391,7 @@ export default function Home() {
                 <ArrowRight size={17} />
               </button>
 
-              <button
-                type="button"
-                className="button button-secondary"
-                onClick={() => scrollTo('coreone')}
-              >
-                Explore CoreOne
-              </button>
-              <a
+                            <a
                 href="https://brainleague-pearl.vercel.app/login"
                 target="_blank"
                 rel="noopener noreferrer"
