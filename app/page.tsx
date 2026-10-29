@@ -392,7 +392,7 @@ export default function Home() {
               </button>
 
                             <a
-                href="https://brainleague-pearl.vercel.app/login"
+                href="https://brainleague-pearl.vercel.app"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="button button-primary"
