@@ -398,6 +398,25 @@ export default function Home() {
               >
                 Explore CoreOne
               </button>
+              <a
+                href="https://brainleague-pearl.vercel.app/login"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="button button-primary"
+                style={{ background: "linear-gradient(135deg, #172541, #304b78)", color: "#f8d477", border: "1px solid #d7ad4f", boxShadow: "0 8px 18px rgba(23,37,65,0.2)" }}
+              >
+                Check BrainLeague App (Web) <ArrowRight size={17} />
+              </a>
+
+              <a
+                href="https://github.com/Martin4dbest/brainlead-android-downloads/releases/download/brainlead-android-v1/application-aa983b29-4ac8-4e14-be10-534f5ab35775.apk"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="button button-secondary"
+                style={{ background: "linear-gradient(135deg, #f8d477, #e8ad35)", color: "#172541", border: "1px solid #d7ad4f", boxShadow: "0 8px 18px rgba(23,37,65,0.15)" }}
+              >
+                Download BrainLeague for Android ↓
+              </a>
             </div>
 
             <div className="hero-note">
@@ -720,29 +739,6 @@ export default function Home() {
         </div>
 </section>
 
-
-      {/* BRAINLEAGUE NEWEST SOLUTION */}
-      <section id="brainleague" className="section section-light">
-        <div className="container">
-          <div className="section-heading">
-            <div>
-              <span className="section-kicker">OUR NEWEST SOLUTION</span>
-              <h2>Discover BrainLeague.</h2>
-              <p>
-                BrainLeague brings practice questions, exam preparation, and academic competitions together in one platform, helping students learn and track their progress.
-              </p>
-            </div>
-          </div>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "12px", marginTop: "24px" }}>
-            <a href="https://brainleague-pearl.vercel.app/login" target="_blank" rel="noopener noreferrer" className="button button-primary">
-              Visit BrainLeague Web <ArrowRight size={16} />
-            </a>
-            <a href="https://github.com/Martin4dbest/brainlead-android-downloads/releases/download/brainlead-android-v1/application-aa983b29-4ac8-4e14-be10-534f5ab35775.apk" target="_blank" rel="noopener noreferrer" className="button button-secondary">
-              Download BrainLeague for Android <MonitorSmartphone size={16} />
-            </a>
-          </div>
-        </div>
-      </section>
 
       {/* ENTERPRISE SOLUTIONS VISUALS */}
       <section id="enterprise-solutions" className="section enterprise-solutions-visual">
