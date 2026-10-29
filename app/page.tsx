@@ -339,7 +339,6 @@ export default function Home() {
             </button>
           </nav>
 
-          <a href="https://github.com/Martin4dbest/brainlead-android-downloads/releases/download/brainlead-android-v1/application-aa983b29-4ac8-4e14-be10-534f5ab35775.apk" aria-label="Download BrainLeague APK" style={{display:"inline-flex",alignItems:"center",justifyContent:"center",gap:"8px",padding:"12px 16px",marginRight:"10px",borderRadius:"8px",backgroundColor:"#f59a35",color:"#172541",fontWeight:700,textDecoration:"none",whiteSpace:"nowrap"}}>↓ Download BrainLeague</a>
           <button
             type="button"
             className="nav-cta"
@@ -721,6 +720,29 @@ export default function Home() {
         </div>
 </section>
 
+
+      {/* BRAINLEAGUE NEWEST SOLUTION */}
+      <section id="brainleague" className="section section-light">
+        <div className="container">
+          <div className="section-heading">
+            <div>
+              <span className="section-kicker">OUR NEWEST SOLUTION</span>
+              <h2>Discover BrainLeague.</h2>
+              <p>
+                BrainLeague brings practice questions, exam preparation, and academic competitions together in one platform, helping students learn and track their progress.
+              </p>
+            </div>
+          </div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "12px", marginTop: "24px" }}>
+            <a href="https://brainleague-pearl.vercel.app/login" target="_blank" rel="noopener noreferrer" className="button button-primary">
+              Visit BrainLeague Web <ArrowRight size={16} />
+            </a>
+            <a href="https://github.com/Martin4dbest/brainlead-android-downloads/releases/download/brainlead-android-v1/application-aa983b29-4ac8-4e14-be10-534f5ab35775.apk" target="_blank" rel="noopener noreferrer" className="button button-secondary">
+              Download BrainLeague for Android <MonitorSmartphone size={16} />
+            </a>
+          </div>
+        </div>
+      </section>
 
       {/* ENTERPRISE SOLUTIONS VISUALS */}
       <section id="enterprise-solutions" className="section enterprise-solutions-visual">
