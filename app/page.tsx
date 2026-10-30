@@ -344,7 +344,7 @@ export default function Home() {
             className="nav-cta"
             onClick={() => scrollTo('booking')}
           >
-            Book a Demo
+            Book a Core1 School Demo
             <ArrowRight size={15} />
           </button>
 
@@ -387,7 +387,7 @@ export default function Home() {
                 className="button button-primary"
                 onClick={() => scrollTo('booking')}
               >
-                Book a Demo
+                Book a Core1 School Demo
                 <ArrowRight size={17} />
               </button>
 
@@ -398,7 +398,7 @@ export default function Home() {
                 className="button button-primary"
                 style={{ background: "linear-gradient(135deg, #172541, #304b78)", color: "#f8d477", border: "1px solid #d7ad4f", boxShadow: "0 8px 18px rgba(23,37,65,0.2)" }}
               >
-                Check BrainLeague App (Web) <ArrowRight size={17} />
+                Explore BrainLeague Web App <ArrowRight size={17} />
               </a>
 
               <a
@@ -1112,7 +1112,7 @@ export default function Home() {
               Product
             </button>
             <button type="button" onClick={() => scrollTo('booking')}>
-              Book a Demo
+              Book a Core1 School Demo
             </button>
           </div>
 
