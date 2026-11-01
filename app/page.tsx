@@ -1074,7 +1074,7 @@ export default function Home() {
             </a>
 
             <a
-              href="https://wa.me/2349045531092"
+              href="https://wa.me/2349157444975"
               target="_blank"
               rel="noreferrer"
             >
@@ -1231,7 +1231,7 @@ export default function Home() {
 
       <a
         className="floating-whatsapp"
-        href="https://wa.me/2349045531092"
+        href="https://wa.me/2349157444975"
         target="_blank"
         rel="noreferrer"
         aria-label="Chat on WhatsApp"
