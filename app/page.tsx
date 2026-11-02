@@ -382,15 +382,6 @@ export default function Home() {
             </p>
 
             <div className="hero-actions">
-              <button
-                type="button"
-                className="button button-primary"
-                onClick={() => scrollTo('booking')}
-              >
-                Book a Core1 School Demo
-                <ArrowRight size={17} />
-              </button>
-
                             <a
                 href="https://brainleague-pearl.vercel.app"
                 target="_blank"
